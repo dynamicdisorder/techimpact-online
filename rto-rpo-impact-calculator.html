@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTO/RPO Impact Calculator – Disaster Recovery | TechImpact.online</title>
+    <meta name="description" content="Calculate the financial impact of RTO and RPO targets on disaster recovery. Assess risk levels and get recommendations for improving recovery strategies.">
+    <meta name="keywords" content="RTO calculator, RPO impact tool, disaster recovery estimator, recovery time objective, recovery point objective, business continuity planning">
+    <meta name="author" content="TechImpact.online">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="RTO/RPO Impact Calculator – Disaster Recovery | TechImpact.online">
+    <meta property="og:description" content="Calculate the financial impact of RTO and RPO targets on disaster recovery. Assess risk levels and get recommendations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techimpact.online/rto-rpo-impact-calculator">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RTO/RPO Impact Calculator – Disaster Recovery | TechImpact.online">
+    <meta name="twitter:description" content="Calculate the financial impact of RTO and RPO targets on disaster recovery.">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "RTO/RPO Impact Calculator",
+        "description": "Calculate the financial impact of RTO and RPO targets on disaster recovery",
+        "url": "https://techimpact.online/rto-rpo-impact-calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "TechImpact.online"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the difference between RTO and RPO?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a disaster. RPO (Recovery Point Objective) is the maximum acceptable data loss measured in time."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why do RTO and RPO matter for business continuity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RTO and RPO directly impact business continuity costs. Longer RTO means more downtime and revenue loss. Longer RPO means more data loss and recovery costs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are good RTO and RPO targets?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Targets depend on business criticality. Critical systems: RTO <1 hour, RPO <15 minutes. Important systems: RTO <4 hours, RPO <1 hour. Standard systems: RTO <24 hours, RPO <4 hours."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://techimpact.online/rto-rpo-impact-calculator">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">
+                <span data-i18n="hero.title1">Assess Your Disaster Recovery</span>
+                <span class="gradient-text" data-i18n="hero.title2">RTO/RPO Impact</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Calculate the financial impact of your Recovery Time and Recovery Point objectives. Evaluate risk levels and get actionable recommendations to optimize your disaster recovery strategy.</p>
+            <div class="hero-actions">
+                <a href="start-trial.html" class="btn primary large" data-i18n="hero.start-trial">Start Free Trial</a>
+                <a href="start-trial.html" class="btn secondary large" data-i18n="hero.request-demo">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Toggle -->
+    <div class="language-toggle-container">
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="es">ES</button>
+        </div>
+    </div>
+
+    <!-- Calculator Tabs -->
+    <section class="calculator-tabs">
+        <div class="container">
+            <div class="tab-nav">
+                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty Calculator</a>
+                <a href="website-downtime-cost-calculator.html" class="tab-link" data-i18n="tabs.downtime">Website Downtime Cost</a>
+                <a href="rto-rpo-impact-calculator.html" class="tab-link active" data-i18n="tabs.rto-rpo">RTO/RPO Impact</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-grid">
+                <!-- Calculator Form -->
+                <div class="calculator-form">
+                    <div class="card">
+                        <h2 class="card-title" data-i18n="form.title">RTO/RPO Impact Calculator</h2>
+                        
+                        <div class="form-group">
+                            <label for="rto-target" data-i18n="form.rto-target">RTO Target (hours)</label>
+                            <input type="number" id="rto-target" class="form-input" value="4" min="0.1" step="0.1" placeholder="Target recovery time">
+                            <span class="input-hint" data-i18n="form.rto-hint">Maximum acceptable downtime</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rpo-target" data-i18n="form.rpo-target">RPO Target (hours)</label>
+                            <input type="number" id="rpo-target" class="form-input" value="1" min="0.1" step="0.1" placeholder="Target data loss">
+                            <span class="input-hint" data-i18n="form.rpo-hint">Maximum acceptable data loss</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incident-frequency" data-i18n="form.incident-frequency">Incident Frequency (per year)</label>
+                            <input type="number" id="incident-frequency" class="form-input" value="2" min="0.1" step="0.1" placeholder="Expected incidents">
+                            <span class="input-hint" data-i18n="form.frequency-hint">How many disasters per year</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="revenue-per-hour" data-i18n="form.revenue-per-hour">Revenue per Hour</label>
+                            <div class="input-group">
+                                <select id="currency" class="currency-select">
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                                <input type="number" id="revenue-per-hour" class="form-input" value="10000" min="0" step="100">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data-recreation-cost" data-i18n="form.data-recreation-cost">Data Recreation Cost per Hour (optional)</label>
+                            <div class="input-group">
+                                <select id="data-currency" class="currency-select">
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                                <input type="number" id="data-recreation-cost" class="form-input" value="0" min="0" step="100">
+                            </div>
+                            <span class="input-hint" data-i18n="form.data-recreation-hint">Cost to recreate lost data</span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn primary" id="calculate-btn" data-i18n="form.calculate">Calculate Risk</button>
+                            <button class="btn secondary" id="reset-btn" data-i18n="form.reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="calculator-results">
+                    <div class="card">
+                        <h2 class="card-title" data-i18n="results.title">Impact Analysis</h2>
+                        
+                        <div class="result-main">
+                            <div class="annualized-loss">
+                                <span class="loss-amount" id="annualized-loss-amount">$80,000</span>
+                                <span class="loss-label" data-i18n="results.annualized-loss">Annualized Loss</span>
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="cost-breakdown">
+                            <h4 data-i18n="results.cost-breakdown">Cost Breakdown</h4>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.rto-loss">RTO Loss:</span>
+                                <span class="breakdown-value" id="rto-loss">$80,000</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.rpo-cost">RPO Cost:</span>
+                                <span class="breakdown-value" id="rpo-cost">$0</span>
+                            </div>
+                            <div class="breakdown-item breakdown-total">
+                                <span class="breakdown-label" data-i18n="results.total-impact">Total Impact:</span>
+                                <span class="breakdown-value" id="total-impact">$80,000</span>
+                            </div>
+                        </div>
+
+                        <!-- RTO/RPO Comparison Bars -->
+                        <div class="comparison-section">
+                            <h4 data-i18n="results.comparison">Target vs Risk Assessment</h4>
+                            
+                            <div class="comparison-item">
+                                <div class="comparison-label">
+                                    <span data-i18n="results.rto-comparison">RTO</span>
+                                    <span class="comparison-value" id="rto-comparison">4h target</span>
+                                </div>
+                                <div class="comparison-bar">
+                                    <div class="target-line" id="rto-target-line"></div>
+                                    <div class="risk-indicator" id="rto-risk-indicator"></div>
+                                </div>
+                            </div>
+
+                            <div class="comparison-item">
+                                <div class="comparison-label">
+                                    <span data-i18n="results.rpo-comparison">RPO</span>
+                                    <span class="comparison-value" id="rpo-comparison">1h target</span>
+                                </div>
+                                <div class="comparison-bar">
+                                    <div class="target-line" id="rpo-target-line"></div>
+                                    <div class="risk-indicator" id="rpo-risk-indicator"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="risk-assessment">
+                            <div class="risk-badge-container">
+                                <span class="risk-label" data-i18n="results.risk-level">Risk Level:</span>
+                                <span class="risk-badge" id="risk-badge">Medium</span>
+                            </div>
+                            <div class="risk-explanation" id="risk-explanation">
+                                <p class="risk-explanation-text" data-i18n="results.risk-explanation">Risk is assessed based on RTO and RPO targets compared to industry standards.</p>
+                            </div>
+                        </div>
+
+                        <div class="recommendations">
+                            <h4 data-i18n="results.recommendations">Recommendations</h4>
+                            <div class="recommendations-content" id="recommendations-content">
+                                <p data-i18n="results.default-recommendation">Enter your RTO and RPO targets to get personalized recommendations for improving your disaster recovery strategy.</p>
+                            </div>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="btn secondary" id="copy-summary-btn">
+                                <span class="btn-icon">📋</span>
+                                <span data-i18n="results.copy-summary">Copy Summary</span>
+                            </button>
+                            <button class="btn secondary" id="download-csv-btn">
+                                <span class="btn-icon">📊</span>
+                                <span data-i18n="results.download-csv">Download CSV</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-i18n="how-it-works.title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step1.title">Define Your Targets</h3>
+                    <p class="step-description" data-i18n="how-it-works.step1.description">Set your RTO and RPO targets based on business requirements and enter your revenue per hour and incident frequency.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step2.title">Calculate Impact</h3>
+                    <p class="step-description" data-i18n="how-it-works.step2.description">We calculate the annualized financial impact based on your targets and assess the risk level of your current strategy.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step3.title">Visualize Risk</h3>
+                    <p class="step-description" data-i18n="how-it-works.step3.description">Compare your targets against industry standards and see visual indicators of your risk exposure.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step4.title">Get Recommendations</h3>
+                    <p class="step-description" data-i18n="how-it-works.step4.description">Receive actionable recommendations to improve your disaster recovery strategy and reduce business risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="8930">0</div>
+                    <div class="stat-label" data-i18n="stats.calculations">RTO/RPO Calculations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="456">0</div>
+                    <div class="stat-label" data-i18n="stats.teams-impacted">Teams Impacted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2.8">0</div>
+                    <div class="stat-label" data-i18n="stats.avg-rto">Avg RTO (hours)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="97.2">0</div>
+                    <div class="stat-label" data-i18n="stats.accuracy">Accuracy Rate (%)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q1.question">What is the difference between RTO and RPO?</div>
+                    <div class="faq-answer" data-i18n="faq.q1.answer">RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a disaster. RPO (Recovery Point Objective) is the maximum acceptable data loss measured in time before the incident.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q2.question">Why do RTO and RPO matter for business continuity?</div>
+                    <div class="faq-answer" data-i18n="faq.q2.answer">RTO and RPO directly impact business continuity costs. Longer RTO means more downtime and revenue loss. Longer RPO means more data loss and recovery costs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q3.question">What are good RTO and RPO targets?</div>
+                    <div class="faq-answer" data-i18n="faq.q3.answer">Targets depend on business criticality. Critical systems: RTO <1 hour, RPO <15 minutes. Important systems: RTO <4 hours, RPO <1 hour. Standard systems: RTO <24 hours, RPO <4 hours.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q4.question">How do I reduce my RTO and RPO?</div>
+                    <div class="faq-answer" data-i18n="faq.q4.answer">Improve infrastructure redundancy, implement automated failover, use real-time replication, optimize backup strategies, and invest in disaster recovery testing and training.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q5.question">What's the cost of achieving lower RTO/RPO?</div>
+                    <div class="faq-answer" data-i18n="faq.q5.answer">Lower RTO/RPO requires more investment in infrastructure, redundancy, and technology. The cost increases exponentially as targets get more aggressive, but so does business protection.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot - Bottom -->
+    <div id="ad-slot-bottom" class="ad-slot">
+        <!-- Ad content will be inserted here -->
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Include System -->
+    <script src="js/includes.js"></script>
+
+    <!-- Utility Modules -->
+    <script src="utils/rtoMath.js"></script>
+    <script src="utils/format.js"></script>
+    <script src="utils/rtoTests.js"></script>
+    
+    <!-- Main Application Script -->
+    <script src="rto-rpo-calculator.js"></script>
+</body>
+</html>

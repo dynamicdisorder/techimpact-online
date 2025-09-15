@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Downtime Cost Calculator – TechImpact.online</title>
+    <meta name="description" content="Calculate the financial impact of website downtime and outages. Estimate revenue loss, refund costs, and productivity impact with our precision downtime calculator.">
+    <meta name="keywords" content="outage calculator, downtime business loss estimator, website downtime cost, revenue loss calculator, business impact assessment">
+    <meta name="author" content="TechImpact.online">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Website Downtime Cost Calculator – TechImpact.online">
+    <meta property="og:description" content="Calculate the financial impact of website downtime and outages. Estimate revenue loss, refund costs, and productivity impact.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techimpact.online/website-downtime-cost-calculator">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Downtime Cost Calculator – TechImpact.online">
+    <meta name="twitter:description" content="Calculate the financial impact of website downtime and outages.">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Website Downtime Cost Calculator",
+        "description": "Calculate the financial impact of website downtime and outages",
+        "url": "https://techimpact.online/website-downtime-cost-calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "TechImpact.online"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What factors affect downtime cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Key factors include hourly revenue rate, outage duration, refund percentage, conversion drop rate, and employee productivity costs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I calculate annualized downtime impact?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Multiply the single incident cost by the expected number of similar outages per year to get annualized impact."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I include employee costs in downtime calculations?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, include employee costs when staff cannot work effectively during outages, including support team overtime and lost productivity."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://techimpact.online/website-downtime-cost-calculator">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">
+                <span data-i18n="hero.title1">Calculate the True Cost of</span>
+                <span class="gradient-text" data-i18n="hero.title2">Website Downtime</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">Assess the financial impact of outages with precision. Calculate revenue loss, refund costs, and productivity impact to make informed decisions about your infrastructure investments.</p>
+            <div class="hero-actions">
+                <a href="start-trial.html" class="btn primary large" data-i18n="hero.start-trial">Start Free Trial</a>
+                <a href="start-trial.html" class="btn secondary large" data-i18n="hero.request-demo">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Language Toggle -->
+    <div class="language-toggle-container">
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="es">ES</button>
+        </div>
+    </div>
+
+    <!-- Calculator Tabs -->
+    <section class="calculator-tabs">
+        <div class="container">
+            <div class="tab-nav">
+                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty Calculator</a>
+                <a href="website-downtime-cost-calculator.html" class="tab-link active" data-i18n="tabs.downtime">Website Downtime Cost</a>
+                <a href="rto-rpo-impact-calculator.html" class="tab-link" data-i18n="tabs.rto-rpo">RTO/RPO Impact</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="container">
+            <div class="calculator-grid">
+                <!-- Calculator Form -->
+                <div class="calculator-form">
+                    <div class="card">
+                        <h2 class="card-title" data-i18n="form.title">Downtime Cost Calculator</h2>
+                        
+                        <div class="form-group">
+                            <label for="revenue-per-hour" data-i18n="form.revenue-per-hour">Revenue per Hour</label>
+                            <div class="input-group">
+                                <select id="currency" class="currency-select">
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                                <input type="number" id="revenue-per-hour" class="form-input" value="10000" min="0" step="100">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="outage-duration" data-i18n="form.outage-duration">Outage Duration</label>
+                            <div class="duration-inputs">
+                                <input type="number" id="outage-hours" class="form-input" value="2" min="0" step="0.5" placeholder="Hours">
+                                <input type="number" id="outage-minutes" class="form-input" value="30" min="0" max="59" step="1" placeholder="Minutes">
+                            </div>
+                            <div class="alternative-input">
+                                <label for="timestamp-start" data-i18n="form.timestamp-start">Or Start Time</label>
+                                <input type="datetime-local" id="timestamp-start" class="form-input">
+                            </div>
+                            <div class="alternative-input">
+                                <label for="timestamp-end" data-i18n="form.timestamp-end">End Time</label>
+                                <input type="datetime-local" id="timestamp-end" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="refund-rate" data-i18n="form.refund-rate">Refund Rate (%)</label>
+                            <input type="number" id="refund-rate" class="form-input" value="5" min="0" max="100" step="0.1">
+                            <span class="input-hint" data-i18n="form.refund-rate-hint">Percentage of affected customers who request refunds</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="conversion-drop" data-i18n="form.conversion-drop">Conversion Drop (%)</label>
+                            <input type="number" id="conversion-drop" class="form-input" value="15" min="0" max="100" step="0.1">
+                            <span class="input-hint" data-i18n="form.conversion-drop-hint">Expected decrease in conversions during/after outage</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="affected-employees" data-i18n="form.affected-employees">Affected Employees</label>
+                            <input type="number" id="affected-employees" class="form-input" value="50" min="0" step="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hourly-cost-per-employee" data-i18n="form.hourly-cost-per-employee">Hourly Cost per Employee</label>
+                            <div class="input-group">
+                                <select id="employee-currency" class="currency-select">
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                                <input type="number" id="hourly-cost-per-employee" class="form-input" value="50" min="0" step="1">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn primary" id="calculate-btn" data-i18n="form.calculate">Calculate Impact</button>
+                            <button class="btn secondary" id="reset-btn" data-i18n="form.reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="calculator-results">
+                    <div class="card">
+                        <h2 class="card-title" data-i18n="results.title">Impact Analysis</h2>
+                        
+                        <div class="result-main">
+                            <div class="total-loss">
+                                <span class="loss-amount" id="total-loss-amount">$25,750</span>
+                                <span class="loss-label" data-i18n="results.total-loss">Total Loss</span>
+                            </div>
+                        </div>
+
+                        <!-- Sparkline Chart -->
+                        <div class="sparkline-container">
+                            <canvas id="loss-sparkline" width="300" height="60"></canvas>
+                            <span class="sparkline-label" data-i18n="results.cumulative-loss">Cumulative Loss Over Time</span>
+                        </div>
+
+                        <div class="result-breakdown">
+                            <h4 data-i18n="results.breakdown">Cost Breakdown</h4>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.revenue-loss">Revenue Loss:</span>
+                                <span class="breakdown-value" id="revenue-loss">$25,000</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.refund-costs">Refund Costs:</span>
+                                <span class="breakdown-value" id="refund-costs">$1,250</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.productivity-loss">Productivity Loss:</span>
+                                <span class="breakdown-value" id="productivity-loss">$5,000</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label" data-i18n="results.conversion-drop">Conversion Drop Impact:</span>
+                                <span class="breakdown-value" id="conversion-drop-impact">$3,000</span>
+                            </div>
+                        </div>
+
+                        <div class="annualized-impact">
+                            <div class="impact-card">
+                                <h4 data-i18n="results.annualized-impact">Annualized Impact</h4>
+                                <div class="impact-input">
+                                    <label for="incidents-per-year" data-i18n="form.incidents-per-year">Incidents per Year:</label>
+                                    <input type="number" id="incidents-per-year" class="form-input" value="12" min="1" step="1">
+                                </div>
+                                <div class="impact-result">
+                                    <span class="annual-loss" id="annual-loss">$309,000</span>
+                                    <span class="annual-label" data-i18n="results.annual-loss">Annual Loss</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="btn secondary" id="copy-summary-btn">
+                                <span class="btn-icon">📋</span>
+                                <span data-i18n="results.copy-summary">Copy Summary</span>
+                            </button>
+                            <button class="btn secondary" id="download-csv-btn">
+                                <span class="btn-icon">📊</span>
+                                <span data-i18n="results.download-csv">Download CSV</span>
+                            </button>
+                            <button class="btn secondary" id="share-link-btn">
+                                <span class="btn-icon">🔗</span>
+                                <span data-i18n="results.share-link">Share Link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-i18n="how-it-works.title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step1.title">Input Your Metrics</h3>
+                    <p class="step-description" data-i18n="how-it-works.step1.description">Enter your hourly revenue rate, outage duration, and any additional costs like refunds or employee impact.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step2.title">Calculate Direct Losses</h3>
+                    <p class="step-description" data-i18n="how-it-works.step2.description">We calculate revenue loss, refund costs, and productivity impact based on your specific parameters.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step3.title">Analyze Cumulative Impact</h3>
+                    <p class="step-description" data-i18n="how-it-works.step3.description">View the cumulative loss over time with our visual sparkline chart and breakdown analysis.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title" data-i18n="how-it-works.step4.title">Export and Share</h3>
+                    <p class="step-description" data-i18n="how-it-works.step4.description">Copy summaries, download CSV reports, or share links with stakeholders for informed decision-making.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15420">0</div>
+                    <div class="stat-label" data-i18n="stats.calculations">Downtime Calculations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="892">0</div>
+                    <div class="stat-label" data-i18n="stats.teams-impacted">Teams Impacted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2.3">0</div>
+                    <div class="stat-label" data-i18n="stats.avg-downtime">Avg Downtime (hours)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="98.7">0</div>
+                    <div class="stat-label" data-i18n="stats.accuracy">Accuracy Rate (%)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q1.question">What factors affect downtime cost?</div>
+                    <div class="faq-answer" data-i18n="faq.q1.answer">Key factors include hourly revenue rate, outage duration, refund percentage, conversion drop rate, and employee productivity costs. Each factor can significantly impact the total financial loss.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q2.question">How do I calculate annualized downtime impact?</div>
+                    <div class="faq-answer" data-i18n="faq.q2.answer">Multiply the single incident cost by the expected number of similar outages per year to get annualized impact. This helps budget for infrastructure improvements.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q3.question">Should I include employee costs in downtime calculations?</div>
+                    <div class="faq-answer" data-i18n="faq.q3.answer">Yes, include employee costs when staff cannot work effectively during outages, including support team overtime and lost productivity from system unavailability.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q4.question">What's the difference between revenue loss and refund costs?</div>
+                    <div class="faq-answer" data-i18n="faq.q4.answer">Revenue loss is the direct income you miss during the outage. Refund costs are additional expenses when customers demand their money back due to the service disruption.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" data-i18n="faq.q5.question">How accurate are these downtime cost estimates?</div>
+                    <div class="faq-answer" data-i18n="faq.q5.answer">Our calculations provide reliable estimates based on standard business metrics. Accuracy depends on the quality of your input data, particularly revenue rates and employee costs.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot - Bottom -->
+    <div id="ad-slot-bottom" class="ad-slot">
+        <!-- Ad content will be inserted here -->
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Include System -->
+    <script src="js/includes.js"></script>
+
+    <!-- Utility Modules -->
+    <script src="utils/downtimeMath.js"></script>
+    <script src="utils/format.js"></script>
+    <script src="utils/sparkline.js"></script>
+    <script src="utils/tests.js"></script>
+    
+    <!-- Main Application Script -->
+    <script src="website-downtime-calculator.js"></script>
+</body>
+</html>

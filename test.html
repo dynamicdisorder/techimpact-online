@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SLA Calculator Button Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        div { margin: 10px 0; }
+        input, select, button { margin: 5px; padding: 5px; }
+        button { background: #007cba; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        button:hover { background: #005a8b; }
+        #results { border: 1px solid #ccc; padding: 15px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>SLA Calculator Button Test</h1>
+    
+    <div>
+        <label>Contract Value: </label>
+        <input type="number" id="contract-value" value="1000000">
+    </div>
+    
+    <div>
+        <label>Promised Uptime (%): </label>
+        <input type="number" id="promised-uptime" value="99.95">
+    </div>
+    
+    <div>
+        <label>Downtime (minutes): </label>
+        <input type="number" id="downtime-input" value="0">
+    </div>
+    
+    <div>
+        <label>Uptime (%): </label>
+        <input type="number" id="uptime-input" value="100.00">
+    </div>
+    
+    <div>
+        <label>Currency: </label>
+        <select id="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+    </div>
+    
+    <div>
+        <label>Period: </label>
+        <select id="period-selector">
+            <option value="30" selected>30 days</option>
+            <option value="28">28 days</option>
+            <option value="31">31 days</option>
+        </select>
+    </div>
+    
+    <div id="custom-period-group" style="display: none;">
+        <label>Custom Period: </label>
+        <input type="number" id="custom-period-days" value="30">
+    </div>
+    
+    <div>
+        <button id="calculate-btn">Calculate Penalty</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+    
+    <div id="results">
+        <h2>Results</h2>
+        <div>Penalty Amount: <span id="penalty-amount">$0</span></div>
+        <div>Badge: <span id="penalty-badge">No penalty</span></div>
+        <div>Actual Uptime: <span id="actual-uptime">100.00%</span></div>
+        <div>Shortfall: <span id="uptime-below">0.00%</span></div>
+        <div>Applied Penalty: <span id="applied-penalty">0%</span></div>
+        <div>Allowed Downtime: <span id="allowed-downtime-value">21.6 minutes</span></div>
+        <div>Status: <span id="downtime-status">Within allowance by 21.6 min</span></div>
+    </div>
+    
+    <div id="explanation-list"></div>
+    
+    <div id="tier-validation" style="display: none;">
+        <div id="tier-errors"></div>
+        <div id="tier-warnings"></div>
+    </div>
+    
+    <script src="utils/slaMath.js"></script>
+    <script src="utils/format.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

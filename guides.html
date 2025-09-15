@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Guides - SLA, Downtime & Disaster Recovery | TechImpact.online</title>
+    <meta name="description" content="Comprehensive guides on SLA penalties, downtime cost calculation, and disaster recovery planning. Learn best practices for CTOs, DevOps teams, and IT managers.">
+    <meta name="keywords" content="SLA guide, downtime cost guide, disaster recovery guide, RTO RPO guide, IT best practices, CTO resources, DevOps guides">
+    <meta name="author" content="TechImpact.online">
+    <link rel="canonical" href="https://techimpact.online/guides">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://techimpact.online/guides">
+    <meta property="og:title" content="Tech Guides - SLA, Downtime & Disaster Recovery | TechImpact.online">
+    <meta property="og:description" content="Comprehensive guides on SLA penalties, downtime cost calculation, and disaster recovery planning for modern tech teams.">
+    <meta property="og:image" content="https://techimpact.online/assets/og/guides-og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://techimpact.online/guides">
+    <meta property="twitter:title" content="Tech Guides - SLA, Downtime & Disaster Recovery | TechImpact.online">
+    <meta property="twitter:description" content="Comprehensive guides on SLA penalties, downtime cost calculation, and disaster recovery planning for modern tech teams.">
+    <meta property="twitter:image" content="https://techimpact.online/assets/og/guides-twitter-image.jpg">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Tech Guides - SLA, Downtime & Disaster Recovery",
+        "description": "Comprehensive guides on SLA penalties, downtime cost calculation, and disaster recovery planning for modern tech teams",
+        "url": "https://techimpact.online/guides",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "Article",
+                    "position": 1,
+                    "name": "Ultimate Guide to SLA Penalties",
+                    "url": "https://techimpact.online/guides/ultimate-guide-to-sla-penalties",
+                    "description": "Complete guide to understanding, calculating, and managing SLA penalties and service credits"
+                },
+                {
+                    "@type": "Article",
+                    "position": 2,
+                    "name": "Downtime Cost Calculator: Why It Matters",
+                    "url": "https://techimpact.online/guides/downtime-cost-calculator-why-it-matters",
+                    "description": "Learn how to calculate downtime costs and why accurate cost modeling is crucial for business decisions"
+                },
+                {
+                    "@type": "Article",
+                    "position": 3,
+                    "name": "Disaster Recovery Basics: RTO vs RPO",
+                    "url": "https://techimpact.online/guides/disaster-recovery-basics-rto-vs-rpo",
+                    "description": "Master the fundamentals of disaster recovery planning with RTO and RPO objectives"
+                }
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "TechImpact.online",
+            "url": "https://techimpact.online"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="guides-main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="guides-hero">
+                <h1 class="hero-title">Tech Guides & Best Practices</h1>
+                <p class="hero-subtitle">Comprehensive guides for CTOs, DevOps teams, and IT managers on SLA management, downtime cost calculation, and disaster recovery planning.</p>
+            </section>
+
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs">
+                <a href="index.html">Home</a> > 
+                <span>Guides</span>
+            </nav>
+
+            <!-- Guides Grid -->
+            <section class="guides-grid">
+                <article class="guide-card">
+                    <div class="guide-image">
+                        <div class="guide-icon">📋</div>
+                    </div>
+                    <div class="guide-content">
+                        <h2 class="guide-title">
+                            <a href="guides/ultimate-guide-to-sla-penalties.html">Ultimate Guide to SLA Penalties</a>
+                        </h2>
+                        <p class="guide-description">Master SLA penalty calculations, understand service credit structures, and learn how to negotiate better contract terms. This comprehensive guide covers everything from basic calculations to advanced risk management strategies.</p>
+                        <div class="guide-meta">
+                            <span class="guide-category">SLA Management</span>
+                            <span class="guide-read-time">12 min read</span>
+                        </div>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Service Credits</span>
+                            <span class="topic-tag">Contract Negotiation</span>
+                            <span class="topic-tag">Risk Management</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <div class="guide-image">
+                        <div class="guide-icon">💰</div>
+                    </div>
+                    <div class="guide-content">
+                        <h2 class="guide-title">
+                            <a href="guides/downtime-cost-calculator-why-it-matters.html">Downtime Cost Calculator: Why It Matters</a>
+                        </h2>
+                        <p class="guide-description">Learn how to accurately calculate downtime costs and understand why precise cost modeling is crucial for making informed infrastructure investment decisions. Includes real-world examples and ROI calculations.</p>
+                        <div class="guide-meta">
+                            <span class="guide-category">Cost Analysis</span>
+                            <span class="guide-read-time">15 min read</span>
+                        </div>
+                        <div class="guide-topics">
+                            <span class="topic-tag">Revenue Impact</span>
+                            <span class="topic-tag">ROI Analysis</span>
+                            <span class="topic-tag">Business Metrics</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="guide-card">
+                    <div class="guide-image">
+                        <div class="guide-icon">🔄</div>
+                    </div>
+                    <div class="guide-content">
+                        <h2 class="guide-title">
+                            <a href="guides/disaster-recovery-basics-rto-vs-rpo.html">Disaster Recovery Basics: RTO vs RPO</a>
+                        </h2>
+                        <p class="guide-description">Understand the fundamentals of disaster recovery planning with Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO). Learn how to set realistic targets and calculate the financial impact of your recovery strategy.</p>
+                        <div class="guide-meta">
+                            <span class="guide-category">Disaster Recovery</span>
+                            <span class="guide-read-time">18 min read</span>
+                        </div>
+                        <div class="guide-topics">
+                            <span class="topic-tag">RTO/RPO Planning</span>
+                            <span class="topic-tag">Business Continuity</span>
+                            <span class="topic-tag">Risk Assessment</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="guides-cta">
+                <div class="cta-content">
+                    <h2>Ready to Apply These Concepts?</h2>
+                    <p>Use our calculators to put these guides into practice with your own data and scenarios.</p>
+                    <div class="cta-buttons">
+                        <a href="index.html" class="btn btn-primary">Try SLA Calculator</a>
+                        <a href="website-downtime-cost-calculator.html" class="btn btn-secondary">Try Downtime Calculator</a>
+                        <a href="rto-rpo-impact-calculator.html" class="btn btn-secondary">Try RTO/RPO Calculator</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">TechImpact.online</h4>
+                    <p class="footer-description">Advanced calculators and professional reporting tools for modern teams.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h5 class="footer-subtitle">Calculators</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">SLA Penalty Calculator</a></li>
+                        <li><a href="website-downtime-cost-calculator.html" class="footer-link">Downtime Cost Calculator</a></li>
+                        <li><a href="rto-rpo-impact-calculator.html" class="footer-link">RTO/RPO Impact Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h5 class="footer-subtitle">Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="resources.html" class="footer-link">Resources</a></li>
+                        <li><a href="guides.html" class="footer-link">Guides</a></li>
+                        <li><a href="start-trial.html" class="footer-link">Start Free Trial</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p class="legal-disclaimer">All calculations are estimates. Pro features coming soon. Use at your own discretion.</p>
+                    <p class="footer-copyright">&copy; 2024 TechImpact.online. All rights reserved.</p>
+                    <p class="footer-built-with">Built with love by <a href="https://dynamicdisorder.co" target="_blank" rel="noopener" class="footer-link">DynamicDisorder.co</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .guides-main {
+            padding: 2rem 0;
+            min-height: 80vh;
+        }
+
+        .guides-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .guides-hero .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            background: linear-gradient(135deg, #4a9eff, #66b3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .guides-hero .hero-subtitle {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .breadcrumbs a {
+            color: #4a9eff;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            color: #66b3ff;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .guide-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
+        }
+
+        .guide-image {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-icon {
+            font-size: 3rem;
+            display: inline-block;
+            padding: 1rem;
+            background: linear-gradient(135deg, #4a9eff, #66b3ff);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .guide-content {
+            text-align: left;
+        }
+
+        .guide-title {
+            margin-bottom: 1rem;
+        }
+
+        .guide-title a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .guide-title a:hover {
+            color: #4a9eff;
+        }
+
+        .guide-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .guide-category {
+            background: #4a9eff;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .guide-read-time {
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .guide-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .topic-tag {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #444;
+        }
+
+        .guides-cta {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .cta-content h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4a9eff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #66b3ff;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4a9eff;
+            border: 2px solid #4a9eff;
+        }
+
+        .btn-secondary:hover {
+            background: #4a9eff;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .guides-hero .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .guides-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .guide-card {
+                padding: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Include System -->
+    <script src="js/includes.js"></script>
+</body>
+</html>
