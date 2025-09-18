@@ -63,6 +63,10 @@ class IncludeSystem {
     getFallbackContent(path) {
         if (path.includes('header')) {
             return `
+                <!-- Google AdSense -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5341779159353455"
+                     crossorigin="anonymous"></script>
+
                 <!-- Ad Slot - Top -->
                 <div id="ad-slot-top" class="ad-slot">
                     <!-- Ad content will be inserted here -->
@@ -166,12 +170,12 @@ class IncludeSystem {
     async init() {
         // Load header if element exists
         if (document.querySelector('#header-placeholder')) {
-            await this.include('#header-placeholder', 'partials/header.html');
+            await this.include('#header-placeholder', '/partials/header.html');
         }
 
         // Load footer if element exists
         if (document.querySelector('#footer-placeholder')) {
-            await this.include('#footer-placeholder', 'partials/footer.html');
+            await this.include('#footer-placeholder', '/partials/footer.html');
         }
 
         // Set active navigation link based on current page
