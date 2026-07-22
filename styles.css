@@ -3037,6 +3037,64 @@ body {
     font-weight: 600;
 }
 
+/* Educational content blocks on calculator pages */
+.edu-block {
+    padding: 3.5rem 0;
+    background: #0d0d0d;
+    border-top: 1px solid #222;
+}
+
+.edu-block .edu-inner {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.edu-block h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.edu-block h3 {
+    font-size: 1.2rem;
+    margin: 1.75rem 0 0.6rem;
+    color: #eee;
+}
+
+.edu-block p,
+.edu-block li {
+    color: #c8c8c8;
+    line-height: 1.75;
+    font-size: 1.05rem;
+    margin-bottom: 0.85rem;
+}
+
+.edu-block ul,
+.edu-block ol {
+    margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.edu-block a {
+    color: #ff8e8e;
+}
+
+.edu-example {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+}
+
+.edu-example strong {
+    color: #fff;
+}
+
+.edu-note {
+    color: #999;
+    font-size: 0.95rem;
+}
+
 @media (max-width: 640px) {
     .ref-lookup-grid {
         grid-template-columns: 1fr;

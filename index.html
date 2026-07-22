@@ -116,9 +116,11 @@
     <section class="calculator-tabs">
         <div class="container">
             <div class="tab-nav">
-                <a href="index.html" class="tab-link active" data-i18n="tabs.sla">SLA Penalty Calculator</a>
-                <a href="website-downtime-cost-calculator.html" class="tab-link" data-i18n="tabs.downtime">Website Downtime Cost</a>
-                <a href="rto-rpo-impact-calculator.html" class="tab-link" data-i18n="tabs.rto-rpo">RTO/RPO Impact</a>
+                <a href="index.html" class="tab-link active" data-i18n="tabs.sla">SLA Penalty</a>
+                <a href="website-downtime-cost-calculator.html" class="tab-link" data-i18n="tabs.downtime">Downtime Cost</a>
+                <a href="rto-rpo-impact-calculator.html" class="tab-link" data-i18n="tabs.rto-rpo">RTO/RPO</a>
+                <a href="allowed-downtime-calculator.html" class="tab-link">Allowed Downtime</a>
+                <a href="nines-availability-cost-calculator.html" class="tab-link">Cost of Nines</a>
             </div>
         </div>
     </section>
@@ -331,6 +333,74 @@
         </div>
     </section>
 
+    <section class="edu-block" id="learn-sla">
+        <div class="container">
+            <div class="edu-inner">
+                <h2>What is an SLA penalty? (simple explanation)</h2>
+                <p>An <strong>SLA</strong> is a Service Level Agreement. It is a promise about how available a service should be. For example, a vendor may promise <strong>99.95% uptime</strong>.</p>
+                <p>If the service is down more than the allowed time, the vendor may owe you a <strong>service credit</strong>. A service credit usually reduces a future invoice. It is often not cash.</p>
+                <p>This calculator helps you estimate that credit. It uses your contract value, your promised uptime, your real downtime, and your penalty tiers.</p>
+
+                <h3>The basic idea in three steps</h3>
+                <ol>
+                    <li>Find how much downtime your SLA allows.</li>
+                    <li>Compare that to your real downtime.</li>
+                    <li>If you are over the limit, apply the matching penalty percent to the contract value.</li>
+                </ol>
+
+                <h3>Worked example (easy numbers)</h3>
+                <div class="edu-example">
+                    <p><strong>Contract value:</strong> $1,000,000 per month</p>
+                    <p><strong>Promised uptime:</strong> 99.95%</p>
+                    <p><strong>Period:</strong> 30 days</p>
+                    <p><strong>Allowed downtime:</strong> 21.6 minutes</p>
+                    <p><strong>Real downtime:</strong> 90 minutes</p>
+                    <p>Your uptime is below the promise. The shortfall is about 0.16 percentage points. If your tier for that shortfall is <strong>10%</strong>, the estimated credit is <strong>$100,000</strong>.</p>
+                    <p class="edu-note">Always check your real contract. Vendor rules can be different.</p>
+                </div>
+
+                <h3>Common mistakes</h3>
+                <ul>
+                    <li>Using a 30-day month when your SLA uses a calendar month (28–31 days).</li>
+                    <li>Counting maintenance windows that the contract excludes.</li>
+                    <li>Forgetting that credits often need a claim with logs and a deadline.</li>
+                    <li>Treating estimates as a legal claim. This tool is for planning and negotiation support.</li>
+                </ul>
+
+                <h3>Useful links</h3>
+                <p>
+                    See the full downtime tables:
+                    <a href="guides/sla-uptime-downtime-reference.html">SLA uptime → downtime reference</a>.
+                    Or convert any SLA with the
+                    <a href="allowed-downtime-calculator.html">Allowed Downtime Calculator</a>.
+                </p>
+
+                <h3>Words you will see in contracts</h3>
+                <ul>
+                    <li><strong>Uptime</strong> — the percent of time the service should work.</li>
+                    <li><strong>Downtime</strong> — the time the service does not work.</li>
+                    <li><strong>Service credit</strong> — money off a future bill, not always cash back.</li>
+                    <li><strong>Measurement period</strong> — usually one month. Some contracts use 28–31 calendar days.</li>
+                    <li><strong>Exclusion</strong> — events that do not count as downtime (for example planned maintenance).</li>
+                </ul>
+
+                <h3>How to use this calculator well</h3>
+                <ol>
+                    <li>Open your SLA PDF and copy the uptime promise (for example 99.9%).</li>
+                    <li>Copy the credit table (for example 10% credit below 99.0%).</li>
+                    <li>Enter your monthly fee as contract value.</li>
+                    <li>Enter real downtime from monitoring tools (minutes).</li>
+                    <li>Adjust the penalty tiers so they match your contract.</li>
+                    <li>Export the PNG summary and share it with your team before you open a claim.</li>
+                </ol>
+
+                <h3>Who this helps</h3>
+                <p>CTOs, DevOps engineers, SRE teams, procurement, and founders who buy cloud or SaaS services. You do not need to be a lawyer. You only need clear numbers for a discussion.</p>
+                <p>If English is not your first language, keep the example simple: one contract value, one uptime target, one downtime number. Then change one input at a time.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Crawlable internal links (in raw HTML so Google does not depend on JS-loaded header/footer) -->
     <section class="how-it-works" id="explore-site" aria-label="Explore TechImpact.online">
         <div class="container">
@@ -341,7 +411,9 @@
                     <p class="step-description">
                         <a href="/index.html#sla-calculator">SLA Penalty Calculator</a><br>
                         <a href="/website-downtime-cost-calculator.html">Website Downtime Cost</a><br>
-                        <a href="/rto-rpo-impact-calculator.html">RTO/RPO Impact</a>
+                        <a href="/rto-rpo-impact-calculator.html">RTO/RPO Impact</a><br>
+                        <a href="/allowed-downtime-calculator.html">Allowed Downtime</a><br>
+                        <a href="/nines-availability-cost-calculator.html">Cost of Extra Nines</a>
                     </p>
                 </div>
                 <div class="step">
@@ -349,6 +421,8 @@
                     <p class="step-description">
                         <a href="/guides.html">All guides</a><br>
                         <a href="/guides/sla-uptime-downtime-reference.html">SLA uptime → downtime tables</a><br>
+                        <a href="/guides/calendar-month-sla-downtime-tables.html">Calendar-month SLA tables</a><br>
+                        <a href="/guides/rto-rpo-decision-matrix.html">RTO/RPO decision matrix</a><br>
                         <a href="/guides/ultimate-guide-to-sla-penalties.html">SLA penalties guide</a><br>
                         <a href="/guides/disaster-recovery-basics-rto-vs-rpo.html">RTO vs RPO basics</a><br>
                         <a href="/guides/downtime-cost-calculator-real-world-examples.html">Real downtime cost examples</a>
@@ -358,6 +432,8 @@
                     <h3 class="step-title">Company</h3>
                     <p class="step-description">
                         <a href="/product.html">Product overview</a><br>
+                        <a href="/about.html">About</a><br>
+                        <a href="/contact.html">Contact</a><br>
                         <a href="/resources.html">Resources</a><br>
                         <a href="/start-trial.html">Pricing</a><br>
                         <a href="/site-map.html">Full site map</a>
@@ -372,7 +448,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number">3</div>
+                    <div class="stat-number">5</div>
                     <div class="stat-label" data-i18n="stats.calculations">Specialized Calculators</div>
                 </div>
                 <div class="stat-item">

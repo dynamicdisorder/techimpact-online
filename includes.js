@@ -74,9 +74,9 @@ class IncludeSystem {
                             </div>
                             <nav class="nav">
                                 <a href="/product.html" class="nav-link">Product</a>
-                                <a href="/start-trial.html" class="nav-link">Pricing</a>
-                                <a href="/resources.html" class="nav-link">Resources</a>
                                 <a href="/guides.html" class="nav-link">Guides</a>
+                                <a href="/about.html" class="nav-link">About</a>
+                                <a href="/contact.html" class="nav-link">Contact</a>
                             </nav>
                             <div class="header-actions">
                                 <a href="/start-trial.html" class="cta-btn primary">Get Started</a>
