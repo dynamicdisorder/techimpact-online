@@ -112,15 +112,17 @@
     <section class="calculator-tabs">
         <div class="container">
             <div class="tab-nav">
-                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty Calculator</a>
-                <a href="website-downtime-cost-calculator.html" class="tab-link" data-i18n="tabs.downtime">Website Downtime Cost</a>
-                <a href="rto-rpo-impact-calculator.html" class="tab-link active" data-i18n="tabs.rto-rpo">RTO/RPO Impact</a>
+                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty</a>
+                <a href="website-downtime-cost-calculator.html" class="tab-link" data-i18n="tabs.downtime">Downtime Cost</a>
+                <a href="rto-rpo-impact-calculator.html" class="tab-link active" data-i18n="tabs.rto-rpo">RTO/RPO</a>
+                <a href="allowed-downtime-calculator.html" class="tab-link">Allowed Downtime</a>
+                <a href="nines-availability-cost-calculator.html" class="tab-link">Cost of Nines</a>
             </div>
         </div>
     </section>
 
     <!-- Calculator Section -->
-    <section class="calculator-section">
+    <section class="calculator-section" id="rto-calculator">
         <div class="container">
             <div class="calculator-grid">
                 <!-- Calculator Form -->
@@ -294,25 +296,78 @@
         </div>
     </section>
 
+    <section class="edu-block" id="learn-rto">
+        <div class="container">
+            <div class="edu-inner">
+                <h2>RTO and RPO in plain language</h2>
+                <p><strong>RTO</strong> means Recovery Time Objective. It answers: “How long can we be down?”</p>
+                <p><strong>RPO</strong> means Recovery Point Objective. It answers: “How much data can we lose?” (measured in time since the last good backup or copy).</p>
+                <p>Example: RTO = 4 hours means you aim to restore service within 4 hours. RPO = 15 minutes means you accept losing up to 15 minutes of data.</p>
+
+                <h3>Why money matters</h3>
+                <p>Longer RTO usually means more downtime cost. Longer RPO usually means more rebuild or data-recovery cost. This calculator turns those targets into a yearly estimate.</p>
+
+                <div class="edu-example">
+                    <p><strong>Simple yearly formulas</strong></p>
+                    <p>RTO cost/year ≈ RTO hours × incidents per year × revenue per hour</p>
+                    <p>RPO cost/year ≈ RPO hours × incidents per year × data rebuild cost per hour</p>
+                    <p>Total ≈ RTO cost + RPO cost</p>
+                </div>
+
+                <h3>Worked example</h3>
+                <div class="edu-example">
+                    <p>RTO = 2 hours. You expect 3 major incidents per year. Revenue = $5,000/hour.</p>
+                    <p>RTO yearly impact ≈ 2 × 3 × 5,000 = <strong>$30,000</strong>.</p>
+                    <p>RPO = 1 hour. Rebuild cost = $2,000/hour.</p>
+                    <p>RPO yearly impact ≈ 1 × 3 × 2,000 = <strong>$6,000</strong>.</p>
+                    <p><strong>Combined estimate:</strong> $36,000 per year for these targets.</p>
+                </div>
+
+                <h3>Useful next reads</h3>
+                <p>
+                    <a href="guides/rto-rpo-decision-matrix.html">RTO vs RPO decision matrix</a>
+                    ·
+                    <a href="guides/disaster-recovery-basics-rto-vs-rpo.html">Disaster recovery basics</a>
+                    ·
+                    <a href="nines-availability-cost-calculator.html">Cost of extra nines</a>
+                </p>
+
+                <h3>How to pick starting targets</h3>
+                <ul>
+                    <li><strong>Payments / checkout:</strong> short RTO and short RPO (often minutes).</li>
+                    <li><strong>Internal wiki:</strong> longer RTO is often fine (hours).</li>
+                    <li><strong>Analytics:</strong> RPO can be longer if you can rebuild reports.</li>
+                    <li><strong>Customer data systems:</strong> protect RPO carefully — lost data is hard to explain.</li>
+                </ul>
+
+                <h3>What this calculator does not do</h3>
+                <p>It does not design your backup system. It does not test failover. It only helps you talk about money risk. After you choose targets, you still need engineering work: backups, replicas, runbooks, and drills.</p>
+
+                <h3>Tip for international teams</h3>
+                <p>Write RTO and RPO in hours or minutes, not only in “nines.” Many people understand “2 hours to recover” faster than “99.99%.” Share both if you can.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats Section -->
-    <section class="stats">
+    <section class="statistics">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number" data-count="8930">0</div>
-                    <div class="stat-label" data-i18n="stats.calculations">RTO/RPO Calculations</div>
+                    <div class="stat-number">Free</div>
+                    <div class="stat-label">Open tool</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="456">0</div>
-                    <div class="stat-label" data-i18n="stats.teams-impacted">Teams Impacted</div>
+                    <div class="stat-number">Local</div>
+                    <div class="stat-label">Private by design</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="2.8">0</div>
-                    <div class="stat-label" data-i18n="stats.avg-rto">Avg RTO (hours)</div>
+                    <div class="stat-number">RTO+RPO</div>
+                    <div class="stat-label">Two risk views</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="97.2">0</div>
-                    <div class="stat-label" data-i18n="stats.accuracy">Accuracy Rate (%)</div>
+                    <div class="stat-number">Yearly</div>
+                    <div class="stat-label">Annualized impact</div>
                 </div>
             </div>
         </div>

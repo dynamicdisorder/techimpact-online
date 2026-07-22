@@ -94,8 +94,8 @@
             </h1>
             <p class="hero-subtitle" data-i18n="hero.subtitle">Assess the financial impact of outages with precision. Calculate revenue loss, refund costs, and productivity impact to make informed decisions about your infrastructure investments.</p>
             <div class="hero-actions">
-                <a href="start-trial.html" class="btn primary large" data-i18n="hero.start-trial">Start Free Trial</a>
-                <a href="start-trial.html" class="btn secondary large" data-i18n="hero.request-demo">Request Demo</a>
+                <a href="#downtime-calculator" class="btn primary large">Try the Calculator</a>
+                <a href="guides/downtime-cost-calculator-why-it-matters.html" class="btn secondary large">Read the Guide</a>
             </div>
         </div>
     </section>
@@ -112,15 +112,17 @@
     <section class="calculator-tabs">
         <div class="container">
             <div class="tab-nav">
-                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty Calculator</a>
-                <a href="website-downtime-cost-calculator.html" class="tab-link active" data-i18n="tabs.downtime">Website Downtime Cost</a>
-                <a href="rto-rpo-impact-calculator.html" class="tab-link" data-i18n="tabs.rto-rpo">RTO/RPO Impact</a>
+                <a href="index.html" class="tab-link" data-i18n="tabs.sla">SLA Penalty</a>
+                <a href="website-downtime-cost-calculator.html" class="tab-link active" data-i18n="tabs.downtime">Downtime Cost</a>
+                <a href="rto-rpo-impact-calculator.html" class="tab-link" data-i18n="tabs.rto-rpo">RTO/RPO</a>
+                <a href="allowed-downtime-calculator.html" class="tab-link">Allowed Downtime</a>
+                <a href="nines-availability-cost-calculator.html" class="tab-link">Cost of Nines</a>
             </div>
         </div>
     </section>
 
     <!-- Calculator Section -->
-    <section class="calculator-section">
+    <section class="calculator-section" id="downtime-calculator">
         <div class="container">
             <div class="calculator-grid">
                 <!-- Calculator Form -->
@@ -291,25 +293,88 @@
         </div>
     </section>
 
+    <section class="edu-block" id="learn-downtime">
+        <div class="container">
+            <div class="edu-inner">
+                <h2>What does “downtime cost” mean?</h2>
+                <p><strong>Downtime</strong> means your website or service is not working for users. The <strong>cost</strong> is the money you lose while it is down — and sometimes after it is back.</p>
+                <p>This calculator adds common cost parts:</p>
+                <ul>
+                    <li><strong>Lost revenue</strong> — sales or billable use you did not get.</li>
+                    <li><strong>Refunds</strong> — money you return to customers.</li>
+                    <li><strong>Lost productivity</strong> — staff who cannot work normally.</li>
+                    <li><strong>Conversion drop</strong> — fewer users complete a purchase or signup.</li>
+                </ul>
+
+                <h3>Simple formula</h3>
+                <div class="edu-example">
+                    <p><strong>Duration (hours)</strong> = hours + (minutes ÷ 60)</p>
+                    <p><strong>Revenue loss</strong> = revenue per hour × duration</p>
+                    <p><strong>Total estimate</strong> = revenue loss + refunds + productivity loss + other selected costs</p>
+                </div>
+
+                <h3>Worked example</h3>
+                <div class="edu-example">
+                    <p>Your site earns about <strong>$8,000 per hour</strong>.</p>
+                    <p>It is down for <strong>45 minutes</strong> (0.75 hours).</p>
+                    <p>Revenue loss ≈ 8,000 × 0.75 = <strong>$6,000</strong>.</p>
+                    <p>If 10% of that leads to refunds, add <strong>$600</strong>.</p>
+                    <p>If 20 support staff cannot work well at $40/hour, add 20 × 40 × 0.75 = <strong>$600</strong>.</p>
+                    <p><strong>Rough total:</strong> about $7,200 for this one outage.</p>
+                    <p class="edu-note">Use your real numbers. Industry averages are only a starting point.</p>
+                </div>
+
+                <h3>When this estimate is weak</h3>
+                <ul>
+                    <li>You do not know revenue per hour for this product.</li>
+                    <li>The outage was partial (slow pages, not full down).</li>
+                    <li>Brand damage lasts weeks and is hard to measure in one form.</li>
+                </ul>
+
+                <h3>Next steps</h3>
+                <p>
+                    Compare allowed SLA downtime in the
+                    <a href="guides/sla-uptime-downtime-reference.html">uptime reference</a>.
+                    Or estimate vendor credits with the
+                    <a href="index.html#sla-calculator">SLA Penalty Calculator</a>.
+                </p>
+
+                <h3>How to choose revenue per hour</h3>
+                <p>If you sell online, take last month’s revenue and divide by the number of hours your store was open. If you are B2B SaaS, use average revenue that depends on the product being online (new signups, usage billing, support capacity).</p>
+                <p>If you are not sure, use a low, medium, and high value. Run the calculator three times. Show the range to your manager. A range is more honest than one fake exact number.</p>
+
+                <h3>Partial outages</h3>
+                <p>Sometimes only one region or one feature fails. Then full “site down” math is too high. Reduce revenue per hour to the share of traffic that was hurt. Example: if 30% of users were affected, use 30% of normal revenue per hour.</p>
+
+                <h3>After you have a number</h3>
+                <ol>
+                    <li>Compare it to the yearly cost of better hosting, failover, or monitoring.</li>
+                    <li>Check if a vendor SLA credit also applies (separate calculator).</li>
+                    <li>Write down assumptions so the next incident uses the same method.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats Section -->
-    <section class="stats">
+    <section class="statistics">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number" data-count="15420">0</div>
-                    <div class="stat-label" data-i18n="stats.calculations">Downtime Calculations</div>
+                    <div class="stat-number">Free</div>
+                    <div class="stat-label">No signup needed</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="892">0</div>
-                    <div class="stat-label" data-i18n="stats.teams-impacted">Teams Impacted</div>
+                    <div class="stat-number">Local</div>
+                    <div class="stat-label">Runs in your browser</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="2.3">0</div>
-                    <div class="stat-label" data-i18n="stats.avg-downtime">Avg Downtime (hours)</div>
+                    <div class="stat-number">USD/EUR</div>
+                    <div class="stat-label">Currency options</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" data-count="98.7">0</div>
-                    <div class="stat-label" data-i18n="stats.accuracy">Accuracy Rate (%)</div>
+                    <div class="stat-number">PNG/CSV</div>
+                    <div class="stat-label">Easy to share</div>
                 </div>
             </div>
         </div>
