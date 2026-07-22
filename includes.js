@@ -63,35 +63,23 @@ class IncludeSystem {
     getFallbackContent(path) {
         if (path.includes('header')) {
             return `
-                <!-- Google AdSense -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5341779159353455"
-                     crossorigin="anonymous"></script>
-
-                <!-- Ad Slot - Top -->
-                <div id="ad-slot-top" class="ad-slot">
-                    <!-- Ad content will be inserted here -->
-                </div>
-
                 <header class="header">
                     <div class="container">
                         <div class="header-content">
                             <div class="logo">
-                                <a href="index.html" class="logo-link">
+                                <a href="/index.html" class="logo-link">
                                     <span class="logo-icon">📊</span>
                                     <span class="logo-text">TechImpact.online</span>
                                 </a>
                             </div>
                             <nav class="nav">
-                                <a href="product.html" class="nav-link">Product</a>
-                                <a href="start-trial.html" class="nav-link">Pricing</a>
-                                <a href="resources.html" class="nav-link">Resources</a>
-                                <a href="guides.html" class="nav-link">Guides</a>
+                                <a href="/product.html" class="nav-link">Product</a>
+                                <a href="/start-trial.html" class="nav-link">Pricing</a>
+                                <a href="/resources.html" class="nav-link">Resources</a>
+                                <a href="/guides.html" class="nav-link">Guides</a>
                             </nav>
                             <div class="header-actions">
-                                <button class="search-btn" aria-label="Search">
-                                    <span>🔍</span>
-                                </button>
-                                <a href="start-trial.html" class="cta-btn primary">Get Started</a>
+                                <a href="/start-trial.html" class="cta-btn primary">Get Started</a>
                             </div>
                         </div>
                     </div>
@@ -170,12 +158,12 @@ class IncludeSystem {
     async init() {
         // Load header if element exists
         if (document.querySelector('#header-placeholder')) {
-            await this.include('#header-placeholder', 'partials/header.html');
+            await this.include('#header-placeholder', '/partials/header.html');
         }
 
         // Load footer if element exists
         if (document.querySelector('#footer-placeholder')) {
-            await this.include('#footer-placeholder', 'partials/footer.html');
+            await this.include('#footer-placeholder', '/partials/footer.html');
         }
 
         // Set active navigation link based on current page
