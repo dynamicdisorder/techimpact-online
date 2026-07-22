@@ -68,6 +68,22 @@
                     "@type": "Answer",
                     "text": "When the money risk of the extra downtime budget (or expected outage difference) is larger than the extra price of the higher SLA, and your team can actually use the tighter budget."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "What are diminishing returns for nines?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Each extra nine cuts downtime budget by about 10×, but cost and complexity often rise faster. The jump from four to five nines is usually much harder than from two to three nines."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I use full-budget exposure or expected outage minutes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use full-budget for an upper-bound planning view. Use expected outage minutes when you have history. Many teams show both numbers in the same business case."
+                }
             }
         ]
     }
@@ -257,7 +273,7 @@
                 <h2>What “nines” means</h2>
                 <p>
                     People say “three nines” or “four nines” when they talk about uptime.
-                    It is shorthand for how many nines appear after the decimal in an availability target.
+                    It is shorthand for how many nines appear in an availability target.
                 </p>
                 <ul>
                     <li><strong>Two nines</strong> → 99%</li>
@@ -269,6 +285,11 @@
                     Each extra nine usually shrinks the allowed downtime by about <strong>10×</strong>.
                     That sounds small on paper. In operations, it is a big jump in engineering effort and cost.
                 </p>
+                <p>
+                    An <strong>SLA</strong> (Service Level Agreement) is the written promise.
+                    “Nines” are a short way to say the uptime part of that promise.
+                    Credits, exclusions, and measurement rules still live in the contract text.
+                </p>
 
                 <div class="edu-example">
                     <p><strong>Simple example: 99.9% vs 99.99% over 30 days</strong></p>
@@ -277,6 +298,26 @@
                     <p>Difference ≈ <strong>38.88 minutes</strong> less downtime budget in one month.</p>
                     <p>Over a year, 99.9% allows about 8.76 hours; 99.99% allows about 52.56 minutes.</p>
                 </div>
+
+                <h3>Diminishing returns: why the next nine gets expensive</h3>
+                <p>
+                    Moving from 99% to 99.9% removes a lot of allowed downtime.
+                    Moving from 99.99% to 99.999% removes only a tiny slice more — but often needs multi-region design, fast failover, and strict change control.
+                </p>
+                <p>
+                    Think of it like noise-cancelling headphones at higher prices:
+                    the first big step helps a lot; each later step costs more for a smaller gain.
+                </p>
+                <ul>
+                    <li><strong>99% → 99.9%:</strong> often reachable with solid basics (backups, monitoring, on-call).</li>
+                    <li><strong>99.9% → 99.99%:</strong> usually needs redundancy and practiced recovery.</li>
+                    <li><strong>99.99% → 99.999%:</strong> rare for whole products; often limited to a critical path.</li>
+                </ul>
+                <p>
+                    Diminishing returns also apply to <em>money</em>.
+                    If you almost never use your current downtime budget, paying for a tighter budget may buy peace of mind you will not use.
+                    If last year you burned most of a 99.9% budget, the next nine may be worth a hard look.
+                </p>
 
                 <h3>How this calculator thinks about money</h3>
                 <p>
@@ -302,15 +343,23 @@
                     <li>The price gap between plans is smaller than the exposure delta you care about.</li>
                     <li>Your team can actually operate inside the tighter budget (monitoring, failover, runbooks).</li>
                     <li>Customer trust or regulated uptime obligations matter as much as raw revenue.</li>
+                    <li>You have clear history of outages that would have fit inside the lower plan’s budget but hurt you.</li>
                 </ul>
                 <p>A higher SLA may <em>not</em> be worth it when:</p>
                 <ul>
                     <li>You already stay well inside a lower budget most years.</li>
                     <li>The expensive plan only covers one region, but your real risk is elsewhere.</li>
                     <li>You need architecture work first — buying a number without reliability work wastes money.</li>
+                    <li>The “higher SLA” still excludes the failure modes you fear (DNS, identity, a single SaaS dependency).</li>
                 </ul>
+                <p>
+                    A practical test: estimate the yearly price delta of the upgrade.
+                    Compare it to (a) the full-budget money delta from this tool, and (b) your expected outage-minutes delta × revenue per hour.
+                    If (b) is much smaller than the price delta, pause.
+                    If (b) is larger <em>and</em> your team can use the tighter target, the upgrade is easier to defend.
+                </p>
 
-                <h3>Worked money example</h3>
+                <h3>Worked money example (USD)</h3>
                 <div class="edu-example">
                     <p>Revenue = $5,000 per hour.</p>
                     <p>SLA A = 99.9% → ~525.6 minutes/year → ~8.76 hours → exposure ≈ <strong>$43,800</strong>.</p>
@@ -318,6 +367,65 @@
                     <p>Budget delta ≈ <strong>$39,420</strong> per year.</p>
                     <p>If the higher plan costs $8,000/year more, the budget math favors the upgrade — if you believe you would otherwise use much of that downtime.</p>
                 </div>
+
+                <h3>Worked money example (EUR)</h3>
+                <div class="edu-example">
+                    <p>Same math, euro inputs. Switch the calculator currency to EUR and set revenue per hour to <strong>€3,200</strong>.</p>
+                    <p>SLA A = 99.9% → ~8.76 hours/year → exposure ≈ 8.76 × 3,200 ≈ <strong>€28,032</strong>.</p>
+                    <p>SLA B = 99.99% → ~0.876 hours/year → exposure ≈ 0.876 × 3,200 ≈ <strong>€2,803</strong>.</p>
+                    <p>Budget delta ≈ <strong>€25,229</strong> per year.</p>
+                    <p>
+                        Suppose the higher plan costs <strong>€6,000/year</strong> more.
+                        On full-budget math, the upgrade still looks attractive.
+                        Now add a reality check: your ops log shows only about <strong>90 minutes</strong> of avoidable outage per year if you stayed on 99.9%.
+                    </p>
+                    <p>
+                        Expected cost delta ≈ (90 ÷ 60) × 3,200 = <strong>€4,800</strong>.
+                        That is <em>less</em> than the €6,000 price gap.
+                        In that case, the honest answer may be “keep 99.9% and spend on monitoring,” not “buy four nines.”
+                    </p>
+                    <p>
+                        Change the story: if history suggests ~<strong>300 minutes</strong>/year of avoidable outage,
+                        expected delta ≈ 5 × 3,200 = <strong>€16,000</strong>, which is above the €6,000 premium.
+                        Then the higher SLA (plus the engineering to use it) is easier to justify.
+                    </p>
+                </div>
+
+                <h3>Caveats (read before you buy)</h3>
+                <ul>
+                    <li>
+                        <strong>Budget ≠ forecast.</strong>
+                        Allowed downtime is a ceiling in the math, not a prediction that you will be down that long.
+                    </li>
+                    <li>
+                        <strong>Contract exclusions matter.</strong>
+                        Planned maintenance, customer-side errors, and third-party networks may not count the way you hope.
+                    </li>
+                    <li>
+                        <strong>Scope matters.</strong>
+                        A high SLA on one region does not protect a single global DNS or identity dependency.
+                    </li>
+                    <li>
+                        <strong>Credits ≠ full business loss.</strong>
+                        Service credits usually refund part of the vendor bill. They rarely repay your lost sales.
+                        Pair this tool with
+                        <a href="website-downtime-cost-calculator.html">Downtime Cost</a>
+                        and the
+                        <a href="index.html#sla-calculator">SLA Penalty Calculator</a>.
+                    </li>
+                    <li>
+                        <strong>Leap years and calendar months.</strong>
+                        This page uses 30-day and 365-day windows for clear comparison.
+                        Your vendor may use real calendar months. Cross-check with
+                        <a href="allowed-downtime-calculator.html">Allowed Downtime</a>
+                        and the
+                        <a href="guides/calendar-month-sla-downtime-tables.html">calendar-month tables</a>.
+                    </li>
+                    <li>
+                        <strong>People and process.</strong>
+                        A tighter SLA without runbooks, paging, and practiced failover is a sticker on a risky system.
+                    </li>
+                </ul>
 
                 <h3>Related tools</h3>
                 <p>
@@ -352,6 +460,18 @@
                 <div class="faq-item">
                     <div class="faq-question">When is a higher SLA worth paying for?</div>
                     <div class="faq-answer">When the money risk of the extra downtime budget (or your expected outage difference) is larger than the extra price of the higher SLA — and your team can actually use the tighter budget.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What are diminishing returns for nines?</div>
+                    <div class="faq-answer">Each extra nine cuts downtime budget by about 10×, but cost and complexity often rise faster. The jump from four to five nines is usually much harder than from two to three nines.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Should I use full-budget exposure or expected outage minutes?</div>
+                    <div class="faq-answer">Use full-budget for an upper-bound planning view. Use expected outage minutes when you have history. Many teams show both numbers in the same business case.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do vendor credits cover my full loss?</div>
+                    <div class="faq-answer">Usually no. Credits often refund part of the service fee. Lost sales and staff time are separate. Model those with the Downtime Cost calculator.</div>
                 </div>
             </div>
         </div>

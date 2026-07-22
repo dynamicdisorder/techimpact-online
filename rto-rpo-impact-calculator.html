@@ -70,6 +70,30 @@
                     "@type": "Answer",
                     "text": "Targets depend on business criticality. Critical systems: RTO <1 hour, RPO <15 minutes. Important systems: RTO <4 hours, RPO <1 hour. Standard systems: RTO <24 hours, RPO <4 hours."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between backup and replication?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A backup is a copy saved on a schedule that you restore later. Replication keeps a second copy updated so you can fail over faster. Many teams use both: replication for speed and backups to go back in time."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why do disaster recovery drills cost money — and why run them?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Drills use engineer time and sometimes extra cloud resources, but they are usually cheaper than discovering during a real outage that restore steps fail. Untested RTO targets are only hopes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What does a bad RTO look like during a real incident?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bad RTO shows up as slow, confused recovery: unclear ownership, missing restore keys, outdated runbooks, late customer updates, and downtime cost rising while the team rediscovers basic steps."
+                }
             }
         ]
     }
@@ -345,6 +369,126 @@
 
                 <h3>Tip for international teams</h3>
                 <p>Write RTO and RPO in hours or minutes, not only in “nines.” Many people understand “2 hours to recover” faster than “99.99%.” Share both if you can.</p>
+
+                <h3>Backup vs replication (plain English)</h3>
+                <p>These two words appear in every disaster-recovery meeting. They are related. They are not the same.</p>
+                <p><strong>Backup</strong> means you copy data to safe storage on a schedule. Example: a full copy every night, plus smaller copies every hour. To use a backup, you usually <em>restore</em> it to a server. That restore takes time. Backups are great against deletes, ransomware, and “oops” mistakes. They are often weaker when you need the service back in minutes.</p>
+                <p><strong>Replication</strong> means you keep a second live (or nearly live) copy of data or systems, often in another place. When the primary fails, you can fail over to the copy. Replication helps short RTO and short RPO. It costs more money and more care. It does not always protect you from bad data: if you delete a row on the primary, the delete can copy to the replica too. That is why many teams still keep backups even when they replicate.</p>
+                <div class="edu-example">
+                    <p><strong>Quick comparison</strong></p>
+                    <ul>
+                        <li>Nightly backup only → RPO often many hours; RTO often many hours.</li>
+                        <li>Hourly backup → better RPO; restore time still limits RTO.</li>
+                        <li>Continuous replication + failover drill → minutes-level RPO/RTO is possible.</li>
+                        <li>Replication + separate backups → fast recovery <em>and</em> protection from bad writes.</li>
+                    </ul>
+                    <p class="edu-note">Pick technology after you pick targets. Do not buy a tool first and invent RTO/RPO later.</p>
+                </div>
+
+                <h3>Sample targets by system type</h3>
+                <p>Targets are business choices. The table below is a starting point for discussion, not a law. Adjust for your industry and risk.</p>
+                <div class="edu-example">
+                    <p><strong>Sample RTO / RPO starting points</strong></p>
+                    <table class="ref-table">
+                        <thead>
+                            <tr>
+                                <th>System type</th>
+                                <th>Sample RTO</th>
+                                <th>Sample RPO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Payments / checkout</td>
+                                <td>15–60 minutes</td>
+                                <td>0–5 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Customer login / core SaaS app</td>
+                                <td>1–4 hours</td>
+                                <td>5–60 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Internal CRM / email</td>
+                                <td>4–12 hours</td>
+                                <td>1–4 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Analytics / BI warehouse</td>
+                                <td>12–48 hours</td>
+                                <td>4–24 hours</td>
+                            </tr>
+                            <tr>
+                                <td>Wiki / static docs</td>
+                                <td>24–72 hours</td>
+                                <td>24 hours</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="edu-note">If two systems share a database, the stricter target usually wins for that shared data store.</p>
+                </div>
+                <p>Write owners next to each row: who can accept the risk, and who builds the recovery path. A target without an owner is only a wish.</p>
+
+                <h3>Cost of drills (why practice is part of the budget)</h3>
+                <p>A <strong>drill</strong> is a practice recovery. You pretend the system failed. You follow the runbook. You measure how long restore or failover really takes.</p>
+                <p>Drills cost money: engineer time, maybe cloud resources, maybe a short planned risk window. Skipping drills also costs money — you discover broken backups during a real incident.</p>
+                <div class="edu-example">
+                    <p><strong>Simple drill cost sketch</strong></p>
+                    <p>4 engineers × 3 hours × $80/hour fully loaded = <strong>$960</strong> staff cost.</p>
+                    <p>Extra cloud restore environment for one day ≈ <strong>$200</strong>.</p>
+                    <p>One quarterly drill ≈ about <strong>$1,160</strong>. Four drills/year ≈ about <strong>$4,640</strong>.</p>
+                    <p>Compare that to one unplanned incident that misses RTO by a full workday.</p>
+                </div>
+                <p>Put drill cost in the same planning conversation as backup storage and replica servers. Recovery that was never tested is not a real RTO.</p>
+
+                <h3>What bad RTO looks like in an incident</h3>
+                <p>Bad RTO is not only “the number was wrong on a slide.” You feel it in the room.</p>
+                <ul>
+                    <li>Nobody knows who is in charge in the first 15 minutes.</li>
+                    <li>The backup password or restore key is missing.</li>
+                    <li>The runbook says “fail over,” but DNS or certificates still point to the dead site.</li>
+                    <li>Status updates to customers start late, so support is flooded.</li>
+                    <li>You restore old data, then spend hours re-entering transactions (RPO pain on top of RTO pain).</li>
+                    <li>Leadership asks for ETAs every five minutes because there is no measured progress board.</li>
+                </ul>
+                <p>When RTO is bad, downtime cost grows minute by minute. This calculator shows the money side. Your incident review should list the process side: what slowed restore, and which drill would have caught it.</p>
+                <p>A useful review question: “Which step took longer than our RTO budget, and why?” Answer with times, not blame.</p>
+
+                <h3>How this ties back to the calculator</h3>
+                <p>Enter your RTO hours, RPO hours, incidents per year, revenue per hour, and rebuild cost per hour. The tool annualizes the risk. If the yearly number is high, you can justify replication, faster backups, or more drills. If the number is low, you may accept longer targets for that system and spend money elsewhere.</p>
+                <p>Change one input at a time. Example: cut RTO from 8 hours to 2 hours and watch the yearly RTO cost drop. Then ask engineering what that cut would require in real life.</p>
+
+                <h3>RPO mistakes that surprise teams</h3>
+                <p>People often focus only on “how fast we are back.” That is RTO. RPO is the quiet twin. A system can be online again in one hour and still have lost a full day of orders if the last good copy was from yesterday.</p>
+                <p>Common RPO mistakes:</p>
+                <ul>
+                    <li>Calling a nightly backup “near zero data loss” when it is not.</li>
+                    <li>Forgetting databases that sit outside the main app backup job.</li>
+                    <li>Assuming cloud snapshots are tested restores (a snapshot you never restored is unproven).</li>
+                    <li>Mixing “we replicate” with “we can roll back a bad deploy.” Replication is not always a time machine.</li>
+                </ul>
+                <p>When you present calculator results, say both numbers out loud: “We plan to be back in X hours, and we may lose up to Y minutes of data.” That sentence prevents false comfort.</p>
+
+                <h3>Related guides</h3>
+                <p>
+                    Choose targets with a structured view:
+                    <a href="guides/rto-rpo-decision-matrix.html">RTO/RPO decision matrix</a>.
+                </p>
+                <p>
+                    Basics in longer form:
+                    <a href="guides/disaster-recovery-basics-rto-vs-rpo.html">Disaster recovery basics — RTO vs RPO</a>.
+                </p>
+                <p>
+                    Turn downtime hours into money for one incident:
+                    <a href="website-downtime-cost-calculator.html">Website Downtime Cost Calculator</a>.
+                </p>
+                <p>
+                    Uptime budgets in minutes:
+                    <a href="guides/sla-uptime-downtime-reference.html">SLA uptime → downtime reference</a>
+                    ·
+                    <a href="nines-availability-cost-calculator.html">Cost of extra nines</a>.
+                </p>
+                <p>Keep English simple in documents you share across countries: define RTO, define RPO, give one example, then show the yearly estimate. Clear words prevent expensive misunderstandings.</p>
             </div>
         </div>
     </section>
@@ -397,6 +541,18 @@
                 <div class="faq-item">
                     <div class="faq-question" data-i18n="faq.q5.question">What's the cost of achieving lower RTO/RPO?</div>
                     <div class="faq-answer" data-i18n="faq.q5.answer">Lower RTO/RPO requires more investment in infrastructure, redundancy, and technology. The cost increases exponentially as targets get more aggressive, but so does business protection.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the difference between backup and replication?</div>
+                    <div class="faq-answer">A backup is a copy saved on a schedule. You restore it when something goes wrong. Restore time often makes RTO longer. Replication keeps a second copy updated continuously or nearly continuously so you can fail over faster. Replication helps short RTO and short RPO, but bad deletes can copy to the replica too. Many teams use both: replication for speed, backups for “go back in time” protection.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Why do disaster recovery drills cost money — and why run them?</div>
+                    <div class="faq-answer">Drills use engineer time and sometimes extra cloud resources. A small quarterly drill might cost about a thousand dollars in staff and environment fees. That is usually cheaper than learning during a real outage that the backup password is missing or the failover DNS step was never tested. If you never drill, your written RTO is only a hope. Include drill cost in the same budget conversation as storage and replicas.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What does a bad RTO look like during a real incident?</div>
+                    <div class="faq-answer">Bad RTO shows up as slow, confused recovery: unclear ownership, missing restore keys, runbooks that do not match production, late customer updates, and long periods with no measured progress. Downtime cost keeps rising while the team rediscovers basic steps. Afterward, compare each major step’s duration to the RTO budget and schedule a drill that practices the slowest step.</div>
                 </div>
             </div>
         </div>

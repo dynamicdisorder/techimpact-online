@@ -43,10 +43,9 @@
             "name": "TechImpact.online",
             "url": "https://www.techimpact.online/"
         },
-        "datePublished": "2024-01-15",
-        "dateModified": "2024-01-15",
-        "articleSection": "Cost Analysis",
-        "wordCount": "4000"
+                        "datePublished": "2024-01-15",
+                        "dateModified": "2026-07-22",
+                        "articleSection": "Cost Analysis"
     }
     </script>
 
@@ -126,7 +125,7 @@
                     <div class="article-meta">
                         <span class="article-category">Cost Analysis</span>
                         <span class="article-read-time">15 min read</span>
-                        <span class="article-date">January 15, 2024</span>
+                        <span class="article-date">Updated July 22, 2026</span>
                     </div>
                 </header>
 
@@ -195,7 +194,84 @@
                             <li>Follow-up actions with owners</li>
                         </ul>
                         
-                        <p>You can implement this as a spreadsheet or use TechImpact's Website Downtime Cost Calculator at <a href="../../website-downtime-cost-calculator.html">/website-downtime-cost-calculator</a> once live.</p>
+                        <p>
+                            You can implement this as a spreadsheet or use TechImpact’s
+                            <a href="../website-downtime-cost-calculator.html">Website Downtime Cost Calculator</a>.
+                            The tool runs in your browser. You keep control of the assumptions.
+                        </p>
+                    </section>
+
+                    <section class="article-section">
+                        <h2>How to gather inputs without guessing forever</h2>
+                        <p>
+                            Perfect data is rare. Useful data is enough.
+                            Gather a first pass in one working session, then refine.
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>Revenue per minute:</strong>
+                                Take last month’s revenue for similar hours ÷ minutes in that window.
+                                For campaigns, use the campaign window only.
+                            </li>
+                            <li>
+                                <strong>Traffic at risk:</strong>
+                                If half your users hit a broken checkout, do not multiply as if 100% of the site died.
+                            </li>
+                            <li>
+                                <strong>Productivity:</strong>
+                                Count people who could not do their main job.
+                                A designer waiting on a wiki is not the same as 40 support agents idle.
+                            </li>
+                            <li>
+                                <strong>Remediation:</strong>
+                                Include overtime, vendor emergency fees, and post-incident reviews that pull seniors off roadmap work.
+                            </li>
+                            <li>
+                                <strong>Credits and refunds:</strong>
+                                Use your policy and what you actually paid after past incidents.
+                            </li>
+                        </ul>
+                        <p>
+                            Write assumptions under the number (“peak Friday evening,” “EU region only”).
+                            Future you will thank present you when finance asks “why this figure?”
+                        </p>
+                    </section>
+
+                    <section class="article-section">
+                        <h2>Partial outages and “the site looks up”</h2>
+                        <p>
+                            Many costly incidents never show as a full homepage outage.
+                            Search works. Marketing pages load. Checkout returns errors for 18 minutes.
+                        </p>
+                        <p>
+                            In the calculator, model that as a shorter hard-down window plus a longer degraded window with a lower conversion rate.
+                            Example: conversion drops from 2.4% to 0.6% for 40 minutes while status is still “green.”
+                            That is real money. Ignoring it underfunds reliability.
+                        </p>
+                    </section>
+
+                    <section class="article-section">
+                        <h2>Turn one incident into a yearly plan</h2>
+                        <p>
+                            A single incident cost is a story.
+                            An annualized view is a budget.
+                        </p>
+                        <div class="formula-box">
+                            <p><strong>Yearly downtime risk ≈ average incident cost × expected incidents per year</strong></p>
+                        </div>
+                        <p>
+                            If a typical major incident costs €40k and you expect three similar events a year, plan around €120k of risk —
+                            before counting smaller brownouts.
+                            Compare that to the yearly cost of monitoring, failover, and training.
+                            When the risk number is larger and credible, the spend discussion gets easier.
+                        </p>
+                        <p>
+                            Also compare against allowed downtime and SLA credit math using
+                            <a href="../allowed-downtime-calculator.html">Allowed Downtime</a>
+                            and the
+                            <a href="../index.html#sla-calculator">SLA Penalty Calculator</a>.
+                            Credits reduce vendor bills. They rarely repay your full business loss.
+                        </p>
                     </section>
 
                     <section class="article-section">
@@ -242,37 +318,70 @@
                     </section>
 
                     <section class="article-section">
-                        <h2>Keyword Cluster You Can Win</h2>
-                        
-                        <div class="keyword-cluster">
-                            <ul>
-                                <li>downtime cost calculator</li>
-                                <li>website downtime cost calculator</li>
-                                <li>it outage cost calculator</li>
-                                <li>revenue loss from downtime</li>
-                                <li>cost of website downtime formula</li>
-                                <li>uptime percentage to downtime minutes</li>
-                                <li>sla penalty calculator</li>
-                            </ul>
-                        </div>
-                        
-                        <p>SERPs today show simple calculators, not deep how-to plus ROI. That gap is your edge.</p>
+                        <h2>Simple English: what each cost line means</h2>
+                        <ul>
+                            <li>
+                                <strong>Revenue loss</strong> — money you did not take while the money path was broken.
+                            </li>
+                            <li>
+                                <strong>Productivity loss</strong> — paid people who could not do useful work.
+                            </li>
+                            <li>
+                                <strong>Remediation</strong> — extra cost to find, fix, and write up the incident.
+                            </li>
+                            <li>
+                                <strong>Customer concessions</strong> — refunds, coupons, goodwill credits.
+                            </li>
+                            <li>
+                                <strong>SLA payouts</strong> — credits <em>you</em> owe customers under your own promises.
+                            </li>
+                            <li>
+                                <strong>Opportunity loss</strong> — deals delayed or lost; keep this conservative or omit it.
+                            </li>
+                        </ul>
+                        <p>
+                            If a line has no evidence, leave it at zero.
+                            A smaller honest total beats a padded story finance will reject.
+                        </p>
                     </section>
 
                     <section class="article-section">
-                        <h2>Short Testimonials</h2>
-                        
-                        <div class="testimonials">
-                            <blockquote>
-                                <p>"We stopped guessing. The calculator turned debating into math. Priority list wrote itself."</p>
-                                <cite>— VP Engineering, e-commerce</cite>
-                            </blockquote>
-                            
-                            <blockquote>
-                                <p>"Finance finally saw the pattern. That unlocked budget for DR."</p>
-                                <cite>— Director of Ops, SaaS</cite>
-                            </blockquote>
-                        </div>
+                        <h2>Who should own the downtime cost model</h2>
+                        <p>
+                            Engineering can draft the first model.
+                            Finance should bless the revenue and loaded-cost inputs.
+                            Support should own concession assumptions.
+                            Product should confirm which flows are revenue-critical.
+                        </p>
+                        <p>
+                            Put the model in a shared place.
+                            Update it when pricing, regions, or major launches change.
+                            A stale model creates false confidence.
+                        </p>
+                    </section>
+
+                    <section class="article-section">
+                        <h2>Practical checklist before your next incident review</h2>
+                        <ol>
+                            <li>Export monitor timelines with UTC start/end.</li>
+                            <li>Note hard-down vs degraded minutes separately.</li>
+                            <li>Pull revenue or orders for that exact window.</li>
+                            <li>Count people pulled into the incident and for how long.</li>
+                            <li>List refunds, coupons, and SLA credits owed.</li>
+                            <li>Run the numbers in the
+                                <a href="../website-downtime-cost-calculator.html">downtime cost calculator</a>.</li>
+                            <li>Write one investment decision the number supports (or rejects).</li>
+                        </ol>
+                    </section>
+
+                    <section class="article-section">
+                        <h2>Related reading on TechImpact.online</h2>
+                        <ul>
+                            <li><a href="downtime-cost-calculator-real-world-examples.html">Real downtime cost examples</a></li>
+                            <li><a href="../nines-availability-cost-calculator.html">Cost of Extra Nines</a></li>
+                            <li><a href="how-to-file-sla-service-credit-claim.html">How to file an SLA service credit claim</a></li>
+                            <li><a href="rto-rpo-decision-matrix.html">RTO/RPO decision matrix</a></li>
+                        </ul>
                     </section>
 
                     <section class="article-section">

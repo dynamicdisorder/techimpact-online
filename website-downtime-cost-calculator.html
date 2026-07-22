@@ -70,6 +70,30 @@
                     "@type": "Answer",
                     "text": "Yes, include employee costs when staff cannot work effectively during outages, including support team overtime and lost productivity."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "How should ecommerce and SaaS teams pick different inputs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ecommerce teams should start with checkout revenue per hour for the same time of day, then add refunds and support overtime. SaaS teams should separate immediate cash impact from delayed pipeline or signup value, and scale by the share of users affected when the outage is partial."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I include reputational damage in the total?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Only as a clearly labeled add-on. Keep a base case with revenue, refunds, and productivity. Then add a separate stress case with a reputation amount and one sentence explaining why."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What does annualizing a downtime incident mean?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Annualizing means multiplying one typical incident cost by how many similar incidents you expect in a year, then comparing that yearly figure to the cost of reliability improvements."
+                }
             }
         ]
     }
@@ -345,6 +369,7 @@
 
                 <h3>Partial outages</h3>
                 <p>Sometimes only one region or one feature fails. Then full “site down” math is too high. Reduce revenue per hour to the share of traffic that was hurt. Example: if 30% of users were affected, use 30% of normal revenue per hour.</p>
+                <p>Also write what “affected” means. Were pages slow, or fully broken? Could users still browse but not pay? A browse-only failure may lose conversions even when the home page still loads. In that case, model the conversion drop instead of pretending revenue was zero.</p>
 
                 <h3>After you have a number</h3>
                 <ol>
@@ -352,6 +377,136 @@
                     <li>Check if a vendor SLA credit also applies (separate calculator).</li>
                     <li>Write down assumptions so the next incident uses the same method.</li>
                 </ol>
+
+                <h3>Ecommerce vs SaaS examples</h3>
+                <p>Not every business loses money the same way. Two common patterns help you pick inputs.</p>
+                <p><strong>Ecommerce (online store)</strong></p>
+                <p>Money usually stops when checkout stops. If the store makes $120,000 in a 30-day month and runs 24 hours a day, revenue per hour ≈ 120,000 ÷ (30 × 24) ≈ <strong>$167 per hour</strong> on average. Peak hours (evenings, campaigns) can be much higher. For a flash sale, use the sale-hour rate, not the quiet Tuesday rate.</p>
+                <div class="edu-example">
+                    <p><strong>Ecommerce worked sketch</strong></p>
+                    <p>Peak revenue ≈ <strong>$4,000/hour</strong>. Outage = <strong>30 minutes</strong> (0.5 hours).</p>
+                    <p>Revenue loss ≈ 4,000 × 0.5 = <strong>$2,000</strong>.</p>
+                    <p>Refunds on failed orders: add <strong>$300</strong>.</p>
+                    <p>Support overtime (4 people × $35/hour × 0.5): add <strong>$70</strong>.</p>
+                    <p>Rough incident total ≈ <strong>$2,370</strong> before brand effects.</p>
+                </div>
+                <p><strong>SaaS (subscription software)</strong></p>
+                <p>Monthly subscription fees often continue even during a short outage. So “lost revenue” is not always the full MRR (monthly recurring revenue) divided by hours. Better inputs are:</p>
+                <ul>
+                    <li>New signups or upgrades you missed during the outage.</li>
+                    <li>Usage-based billing you could not collect.</li>
+                    <li>Credits or refunds you promise in your own customer SLA.</li>
+                    <li>Churn risk if the outage was long or public.</li>
+                </ul>
+                <div class="edu-example">
+                    <p><strong>SaaS worked sketch</strong></p>
+                    <p>You normally close <strong>$2,500/hour</strong> in new annual contracts during business hours (pipeline that needs the product demo and signup flow).</p>
+                    <p>Outage = <strong>2 hours</strong> on a weekday.</p>
+                    <p>Missed pipeline ≈ 2,500 × 2 = <strong>$5,000</strong> (not the same as cash today, but useful for planning).</p>
+                    <p>You also issue <strong>$1,200</strong> in goodwill credits to angry customers.</p>
+                    <p>Eight engineers lose focus at ~$75/hour fully loaded × 2 hours = <strong>$1,200</strong>.</p>
+                    <p>Rough total for this model ≈ <strong>$7,400</strong>.</p>
+                    <p class="edu-note">SaaS leaders should label “pipeline” and “cash” separately so finance does not treat them as the same thing.</p>
+                </div>
+
+                <h3>How to estimate revenue per hour</h3>
+                <p>Use the simplest method that matches your business. Short sentences help teams agree.</p>
+                <ol>
+                    <li><strong>Store or marketplace:</strong> last 30 days of revenue ÷ hours the store was open.</li>
+                    <li><strong>Peak-aware store:</strong> take revenue from similar peak hours only, then average those hours.</li>
+                    <li><strong>Lead-gen site:</strong> (leads per hour × close rate × average deal value).</li>
+                    <li><strong>SaaS signup funnel:</strong> (signups per hour × activation rate × average first-year value).</li>
+                    <li><strong>Usage billing:</strong> average billable usage value per hour when the API is healthy.</li>
+                </ol>
+                <p>If you only know monthly revenue and you run 24×7:</p>
+                <div class="edu-example">
+                    <p>Revenue per hour ≈ monthly revenue ÷ (days in month × 24)</p>
+                    <p>Example: €90,000 ÷ (30 × 24) ≈ <strong>€125 per hour</strong>.</p>
+                </div>
+                <p>If the outage hit only part of the product, multiply by the affected share of traffic or revenue. Example: 40% of users on the broken checkout → use 40% of the normal hourly rate.</p>
+
+                <h3>Reputational cost caveat</h3>
+                <p><strong>Reputation</strong> means trust. Trust is real. It is also hard to put in one form field.</p>
+                <p>A short outage may cost only the hours you can measure. A public outage during a big launch may cost weeks of sales conversations, press questions, and renewals. That longer tail is <em>reputational cost</em>.</p>
+                <p>This calculator can hold a manual “other cost” number if you want. Treat it as a judgment call, not a precise science. Good practice:</p>
+                <ul>
+                    <li>Keep a base case with only measured costs (revenue, refunds, overtime).</li>
+                    <li>Keep a stress case that adds a reputation add-on (for example 1× or 2× the base).</li>
+                    <li>Write why you chose that add-on in one sentence.</li>
+                </ul>
+                <p>Do not let a huge reputation guess hide weak inputs. Fix revenue-per-hour first. Then discuss brand risk with marketing or customer success.</p>
+
+                <h3>Annualizing incidents</h3>
+                <p><strong>Annualizing</strong> means turning one incident into a yearly picture. It helps budgeting.</p>
+                <p>Simple method:</p>
+                <div class="edu-example">
+                    <p><strong>Yearly impact</strong> ≈ cost of one typical incident × expected similar incidents per year</p>
+                    <p>Example: one incident ≈ $7,200. You expect about 4 similar events per year.</p>
+                    <p>Annualized ≈ 7,200 × 4 = <strong>$28,800 per year</strong>.</p>
+                </div>
+                <p>Use history when you have it. If last year had two major outages and six small ones, model them as two different incident types. Do not multiply a rare “worst day” by 12 unless you truly expect that every month.</p>
+                <p>Compare the annualized number to the yearly price of fixes: better monitoring, multi-zone hosting, status page process, or on-call training. If fixes cost $10,000/year and annualized loss is $28,800, the investment case is easier to explain.</p>
+
+                <h3>Sample low / mid / high scenario table</h3>
+                <p>When inputs are uncertain, show a range. Managers trust a range more than one fake exact dollar.</p>
+                <div class="edu-example">
+                    <p><strong>Same 45-minute outage, three honesty levels</strong></p>
+                    <table class="ref-table">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Revenue/hour</th>
+                                <th>Extra costs</th>
+                                <th>Rough total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Low</td>
+                                <td>$3,000</td>
+                                <td>$400</td>
+                                <td>~$2,650</td>
+                            </tr>
+                            <tr>
+                                <td>Mid</td>
+                                <td>$8,000</td>
+                                <td>$1,200</td>
+                                <td>~$7,200</td>
+                            </tr>
+                            <tr>
+                                <td>High</td>
+                                <td>$15,000</td>
+                                <td>$3,000</td>
+                                <td>~$14,250</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="edu-note">Totals ≈ (revenue/hour × 0.75) + extra costs. Extra costs = refunds + productivity + small reputation add-on. Replace with your numbers before you present.</p>
+                </div>
+                <p>Run the calculator three times. Save or screenshot each run. Label them Low / Mid / High. That habit prevents endless debate about one “perfect” input.</p>
+
+                <h3>Related guides and calculators</h3>
+                <p>
+                    Real-world walkthroughs:
+                    <a href="guides/downtime-cost-calculator-real-world-examples.html">Downtime cost calculator — real-world examples</a>.
+                </p>
+                <p>
+                    Why the estimate matters for planning:
+                    <a href="guides/downtime-cost-calculator-why-it-matters.html">Why a downtime cost calculator matters</a>.
+                </p>
+                <p>
+                    Allowed minutes by uptime target:
+                    <a href="guides/sla-uptime-downtime-reference.html">SLA uptime → downtime reference</a>.
+                </p>
+                <p>
+                    Vendor credit estimate:
+                    <a href="index.html#sla-calculator">SLA Penalty Calculator</a>.
+                </p>
+                <p>
+                    Recovery targets after disasters:
+                    <a href="rto-rpo-impact-calculator.html">RTO/RPO Impact Calculator</a>.
+                </p>
+                <p>Keep language simple when you share results: what happened, how long, which revenue rate you used, and what you excluded. Clear assumptions beat fancy charts.</p>
             </div>
         </div>
     </section>
@@ -404,6 +559,18 @@
                 <div class="faq-item">
                     <div class="faq-question" data-i18n="faq.q5.question">How accurate are these downtime cost estimates?</div>
                     <div class="faq-answer" data-i18n="faq.q5.answer">Our calculations provide reliable estimates based on standard business metrics. Accuracy depends on the quality of your input data, particularly revenue rates and employee costs.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How should ecommerce and SaaS teams pick different inputs?</div>
+                    <div class="faq-answer">Ecommerce teams should start with checkout revenue per hour for the same time of day as the outage, then add refunds and support overtime. SaaS teams should separate cash that stops immediately from pipeline or signup value that is delayed. Add customer credits if you offer them. If only part of the product failed, scale revenue per hour by the share of users affected. When unsure, run low, mid, and high cases instead of one false exact number.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Should I include reputational damage in the total?</div>
+                    <div class="faq-answer">Only as a clearly labeled add-on. Reputation (lost trust, slower renewals, bad press) can be larger than the outage hours themselves, but it is hard to measure precisely. Keep a base case with revenue, refunds, and productivity only. Then add a separate stress case with a reputation amount and one sentence explaining why. Do not bury a huge guess inside “revenue per hour,” or your team will argue about the wrong input.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What does annualizing a downtime incident mean?</div>
+                    <div class="faq-answer">Annualizing means multiplying one typical incident cost by how many similar incidents you expect in a year. Example: $7,200 × 4 events ≈ $28,800 per year. Use that yearly figure to compare against the yearly cost of better hosting, monitoring, or failover. Do not annualize a once-in-a-decade worst case as if it happens monthly. Split rare major outages and common small ones into different models when you can.</div>
                 </div>
             </div>
         </div>

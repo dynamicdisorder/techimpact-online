@@ -76,6 +76,22 @@
                     "@type": "Answer",
                     "text": "No. Many cloud SLAs use the real calendar month (28–31 days). This calculator lets you pick 28, 29, 30, 31, or a custom period."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "Do small outages count toward the budget?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Usually yes, if they meet the contract’s definition of unavailability. Add every qualifying incident in the period, then compare the total to allowed downtime."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Should I use daily or monthly budgets for on-call?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use the contract period for credits. Use shorter windows (day/week) as internal error budgets so one bad day does not surprise you at month end."
+                }
             }
         ]
     }
@@ -312,6 +328,96 @@
                     <p>Allowed = 44,640 × 0.001 = <strong>44.64 minutes</strong> — a bit more than the 30-day figure.</p>
                     <p>Always match the period your contract uses.</p>
                 </div>
+                <div class="edu-example">
+                    <p><strong>Example E — February (28 days) at 99.9%</strong></p>
+                    <p>Period = 28 × 24 × 60 = 40,320 minutes.</p>
+                    <p>Allowed = 40,320 × 0.001 = <strong>40.32 minutes</strong>.</p>
+                    <p>
+                        That is almost three minutes less than a 30-day model.
+                        If your vendor uses calendar months, do not copy a “30-day blog number” into a February credit claim.
+                    </p>
+                </div>
+                <div class="edu-example">
+                    <p><strong>Example F — Several short outages add up</strong></p>
+                    <p>You had four incidents of 12 minutes each in a 30-day month → 48 minutes total.</p>
+                    <p>Against a 99.9% budget of 43.2 minutes, you are over by 4.8 minutes.</p>
+                    <p>
+                        Achieved uptime = 100 × (1 − 48 / 43,200) ≈ <strong>99.889%</strong>.
+                        Many teams only remember the “big” outage and forget the small ones.
+                        Sum them first, then use the inverse calculator.
+                    </p>
+                </div>
+                <div class="edu-example">
+                    <p><strong>Example G — 99.95% over a week</strong></p>
+                    <p>Period = 7 × 24 × 60 = 10,080 minutes.</p>
+                    <p>Allowed = 10,080 × (1 − 0.9995) = 10,080 × 0.0005 = <strong>5.04 minutes</strong>.</p>
+                    <p>
+                        Weekly budgets are tight. A single bad deploy on Monday can spend the whole week’s allowance.
+                        Use weekly views for error budgets; use monthly views when the contract is monthly.
+                    </p>
+                </div>
+                <div class="edu-example">
+                    <p><strong>Example H — Year view for planning</strong></p>
+                    <p>99.9% over 365 days: 365 × 24 × 60 = 525,600 minutes.</p>
+                    <p>Allowed = 525,600 × 0.001 = <strong>525.6 minutes</strong> (~8.76 hours).</p>
+                    <p>
+                        Year numbers help finance and capacity planning.
+                        Credit claims still follow the period in your contract (often a calendar month).
+                    </p>
+                </div>
+
+                <h3>Calendar month tip</h3>
+                <p>
+                    Many cloud vendors measure availability over the <strong>real calendar month</strong>
+                    (28, 29, 30, or 31 days), not a fixed “30-day slab.”
+                </p>
+                <ul>
+                    <li>Pick 28 / 29 / 30 / 31 in this calculator to match the month you are reviewing.</li>
+                    <li>For leap years, February is 29 days — the budget grows slightly versus a normal February.</li>
+                    <li>
+                        Keep a small table for your top SLAs, or use our
+                        <a href="guides/calendar-month-sla-downtime-tables.html">calendar-month SLA downtime tables</a>.
+                    </li>
+                    <li>
+                        When you file a credit claim, quote the same day count the vendor uses.
+                        See
+                        <a href="guides/how-to-file-sla-service-credit-claim.html">How to file an SLA service credit claim</a>.
+                    </li>
+                </ul>
+                <p>
+                    Tip in one line: <em>wrong period length → wrong allowed minutes → weak credit math.</em>
+                </p>
+
+                <h3>Monitoring tip</h3>
+                <p>
+                    Allowed downtime is only useful if you know how long you were actually down.
+                    Weak monitoring creates false comfort.
+                </p>
+                <ul>
+                    <li>
+                        <strong>Measure from the user’s path.</strong>
+                        A green CPU graph can hide a broken checkout. Prefer synthetic checks on real URLs.
+                    </li>
+                    <li>
+                        <strong>Agree what “down” means.</strong>
+                        Some contracts need failed health checks from multiple regions.
+                        Align your monitors with that definition before you argue about minutes.
+                    </li>
+                    <li>
+                        <strong>Log start and end times in UTC.</strong>
+                        Ambiguous local times cause credit disputes.
+                    </li>
+                    <li>
+                        <strong>Separate brownouts from hard downs.</strong>
+                        Partial degradation may still burn revenue even if uptime “looks fine.”
+                        Pair this tool with the
+                        <a href="website-downtime-cost-calculator.html">downtime cost calculator</a>.
+                    </li>
+                    <li>
+                        <strong>Review the month before it closes.</strong>
+                        If you have already used 35 of 43.2 minutes by day 20, slow risky changes.
+                    </li>
+                </ul>
 
                 <h3>Common mistakes</h3>
                 <ul>
@@ -414,6 +520,22 @@
                 <div class="faq-item">
                     <div class="faq-question">Is a month always 30 days?</div>
                     <div class="faq-answer">No. Many cloud SLAs use the real calendar month (28–31 days). Pick the period that matches your contract.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do small outages count toward the budget?</div>
+                    <div class="faq-answer">Usually yes, if they meet the contract’s definition of unavailability. Add every qualifying incident in the period, then compare the total to allowed downtime.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Should I use daily or monthly budgets for on-call?</div>
+                    <div class="faq-answer">Use the contract period for credits. Use shorter windows (day/week) as internal error budgets so one bad day does not surprise you at month end.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if monitoring missed part of an outage?</div>
+                    <div class="faq-answer">Your credit case gets weaker. Improve external checks and keep UTC timestamps. Guessing minutes after the fact is hard to defend.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Does meeting allowed downtime mean customers were happy?</div>
+                    <div class="faq-answer">Not always. Outages in peak sales hours can hurt more than the same minutes at 3 a.m. Use downtime cost tools for business impact.</div>
                 </div>
             </div>
         </div>

@@ -81,6 +81,30 @@
                     "@type": "Answer",
                     "text": "Yes, all calculations are performed locally in your browser. We don't store or transmit any of your sensitive contract or business data to our servers."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "What is an SLA shortfall in simple words?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Shortfall is the gap between the uptime the vendor promised and the uptime you actually got. Example: promise 99.95%, actual 99.79%. The shortfall is about 0.16 percentage points. Your contract then maps that gap to a credit percent."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need monitoring logs to claim an SLA credit?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Almost always yes. Vendors ask for proof with start and end times, often in UTC. Export checks from an external monitor, remove excluded minutes, and file inside the claim window written in the SLA."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is an SLA service credit the same as insurance?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. An SLA credit is usually money off a future invoice from that vendor and is often much smaller than your real business loss. Insurance is a separate product with its own rules and deductibles."
+                }
             }
         ]
     }
@@ -397,6 +421,140 @@
                 <h3>Who this helps</h3>
                 <p>CTOs, DevOps engineers, SRE teams, procurement, and founders who buy cloud or SaaS services. You do not need to be a lawyer. You only need clear numbers for a discussion.</p>
                 <p>If English is not your first language, keep the example simple: one contract value, one uptime target, one downtime number. Then change one input at a time.</p>
+
+                <h3>Second worked example (EUR)</h3>
+                <p>Here is the same idea with euros. Many European contracts use EUR and calendar months. The math does not change. Only the currency symbol changes.</p>
+                <div class="edu-example">
+                    <p><strong>Contract value:</strong> €40,000 per month (your SaaS or cloud fee)</p>
+                    <p><strong>Promised uptime:</strong> 99.9%</p>
+                    <p><strong>Period:</strong> 30 days (43,200 minutes)</p>
+                    <p><strong>Allowed downtime:</strong> 0.1% of 43,200 = <strong>43.2 minutes</strong></p>
+                    <p><strong>Real downtime:</strong> 120 minutes (from your monitoring tool)</p>
+                    <p>You used 120 minutes. The SLA only allowed 43.2 minutes. You are over the limit.</p>
+                    <p>Suppose your contract says: if monthly uptime falls below 99.9% but stays at or above 99.0%, you get a <strong>15% service credit</strong>.</p>
+                    <p>Estimated credit ≈ 15% × €40,000 = <strong>€6,000</strong> off a future invoice.</p>
+                    <p class="edu-note">This is a planning estimate. Your vendor may round differently, exclude maintenance, or require a claim form within a fixed number of days.</p>
+                </div>
+                <p>Try the calculator with €40,000, 99.9%, and 120 minutes. Then change only one input. For example, try 90 minutes instead of 120. You will see how credits move when downtime changes.</p>
+
+                <h3>What “shortfall” means (tiny table)</h3>
+                <p><strong>Shortfall</strong> means how far you missed the uptime promise. It is not the same as total downtime minutes. First you convert downtime into an uptime percent. Then you compare that percent to the promise.</p>
+                <p>Simple idea:</p>
+                <ul>
+                    <li><strong>Promised uptime</strong> — what the vendor said (example: 99.95%).</li>
+                    <li><strong>Actual uptime</strong> — what really happened (example: 99.79%).</li>
+                    <li><strong>Shortfall</strong> — the gap between them (example: 0.16 percentage points).</li>
+                </ul>
+                <div class="edu-example">
+                    <p><strong>Example shortfall table (30-day month)</strong></p>
+                    <table class="ref-table">
+                        <thead>
+                            <tr>
+                                <th>Real downtime</th>
+                                <th>Actual uptime</th>
+                                <th>Promise</th>
+                                <th>Shortfall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>21.6 min</td>
+                                <td>99.95%</td>
+                                <td>99.95%</td>
+                                <td>0 (on target)</td>
+                            </tr>
+                            <tr>
+                                <td>43.2 min</td>
+                                <td>99.90%</td>
+                                <td>99.95%</td>
+                                <td>0.05 pp</td>
+                            </tr>
+                            <tr>
+                                <td>90 min</td>
+                                <td>~99.79%</td>
+                                <td>99.95%</td>
+                                <td>~0.16 pp</td>
+                            </tr>
+                            <tr>
+                                <td>216 min</td>
+                                <td>99.50%</td>
+                                <td>99.95%</td>
+                                <td>0.45 pp</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="edu-note">“pp” means percentage points. A drop from 99.95% to 99.79% is a shortfall of 0.16 percentage points — not “0.16% of the fee” by itself. The fee percent comes from your credit tiers.</p>
+                </div>
+                <p>Vendors often map shortfall bands to credit percents. Example: 0–0.1 pp shortfall → 10% credit; larger shortfall → 25% credit. Always copy the bands from your PDF. Do not invent them.</p>
+
+                <h3>How monitoring proves downtime</h3>
+                <p>A claim needs evidence. “We felt the site was slow” is not enough. Good proof comes from systems that watch the service from the outside and from the inside.</p>
+                <p><strong>External monitoring</strong> checks your URL or API from the public internet. It records when the check fails. Many teams use tools that ping every 1 or 5 minutes.</p>
+                <p><strong>Internal monitoring</strong> watches servers, queues, and error rates inside your stack. It helps explain <em>why</em> something failed. Vendors still care a lot about customer-visible downtime.</p>
+                <p>To support an SLA claim, collect:</p>
+                <ul>
+                    <li>Start time and end time of each outage (with time zone, usually UTC).</li>
+                    <li>Which endpoints or regions failed.</li>
+                    <li>HTTP status codes or timeout errors from the monitor.</li>
+                    <li>A short timeline: detect → diagnose → recover.</li>
+                    <li>Links or exports from the monitoring dashboard (CSV, PDF, or screenshots with timestamps).</li>
+                </ul>
+                <p>Be careful with false alarms. A monitor in one city can fail while users in other cities are fine. Your contract may define downtime as “unavailable for all users” or “failed health checks from two regions.” Read that line. Then match your proof to that definition.</p>
+                <p>Also separate <strong>degraded</strong> service from <strong>down</strong> service. Slow pages may hurt revenue, but they may not count as SLA downtime unless the contract says so. Write that difference in your notes before you open a claim.</p>
+
+                <h3>Claim checklist (before you email the vendor)</h3>
+                <ol>
+                    <li>Find the SLA section in the signed contract (not only the marketing page).</li>
+                    <li>Confirm the measurement period (calendar month vs fixed 30 days).</li>
+                    <li>List exclusions: planned maintenance, your own code bugs, third-party DNS, force majeure, and similar.</li>
+                    <li>Remove excluded minutes from your downtime total.</li>
+                    <li>Calculate actual uptime and shortfall with the same method the contract uses.</li>
+                    <li>Match the shortfall to the correct credit tier.</li>
+                    <li>Attach monitoring exports with clear timestamps.</li>
+                    <li>Note the claim deadline (often 15–30 days after the month ends).</li>
+                    <li>Send the claim through the channel the contract names (support ticket, account manager, or portal form).</li>
+                    <li>Keep a copy of what you sent and when you sent it.</li>
+                </ol>
+                <p>This calculator helps with steps 5 and 6. It does not replace your contract text or your evidence pack.</p>
+
+                <h3>SLA credit vs insurance (important difference)</h3>
+                <p>People sometimes mix these two ideas. They are not the same.</p>
+                <ul>
+                    <li><strong>SLA service credit</strong> — usually a discount on a future bill from the same vendor. Cap is often a percent of that month’s fees. It rarely pays your full business loss.</li>
+                    <li><strong>Cyber / business interruption insurance</strong> — a separate policy. It may cover larger losses after a deductible and claim process. It is not automatic when uptime drops.</li>
+                </ul>
+                <p>Example: your outage costs the business €50,000 in lost sales. The SLA credit might be only €6,000. Insurance might cover more, but only if the event matches the policy and you filed correctly.</p>
+                <p>Use this calculator for vendor credit estimates. Use a downtime cost calculator for business loss estimates. Talk to your insurer (or broker) for insurance questions. Do not treat an SLA credit as full insurance.</p>
+
+                <h3>When NOT to use this calculator</h3>
+                <ul>
+                    <li>You do not have the real credit tiers from the contract (guessing tiers creates fake confidence).</li>
+                    <li>The outage is still open and minutes are still growing.</li>
+                    <li>You only have “user complaints” and no monitoring timestamps.</li>
+                    <li>The dispute is mainly legal (termination rights, liability caps, negligence). Those need counsel, not a web form.</li>
+                    <li>Your “downtime” is only a partial feature failure and the SLA defines availability differently.</li>
+                    <li>You need exact invoice wording for finance. Export the estimate, then confirm with procurement or legal.</li>
+                </ul>
+                <p>In those cases, pause. Gather facts first. Or use a simpler tool to convert uptime into allowed minutes, then come back.</p>
+
+                <h3>More guides and related tools</h3>
+                <p>
+                    Full minute tables by uptime target:
+                    <a href="guides/sla-uptime-downtime-reference.html">SLA uptime → downtime reference</a>.
+                </p>
+                <p>
+                    Tables for 28-, 29-, 30-, and 31-day months:
+                    <a href="guides/calendar-month-sla-downtime-tables.html">Calendar-month SLA downtime tables</a>.
+                </p>
+                <p>
+                    Convert any percent into allowed minutes yourself:
+                    <a href="allowed-downtime-calculator.html">Allowed Downtime Calculator</a>.
+                </p>
+                <p>
+                    Longer reading on credits and negotiation:
+                    <a href="guides/ultimate-guide-to-sla-penalties.html">Ultimate guide to SLA penalties</a>.
+                </p>
+                <p>Remember: unique numbers beat generic averages. Your contract, your monitors, and your month length are the three inputs that matter most.</p>
             </div>
         </div>
     </section>
@@ -422,6 +580,7 @@
                         <a href="/guides.html">All guides</a><br>
                         <a href="/guides/sla-uptime-downtime-reference.html">SLA uptime → downtime tables</a><br>
                         <a href="/guides/calendar-month-sla-downtime-tables.html">Calendar-month SLA tables</a><br>
+                        <a href="/guides/how-to-file-sla-service-credit-claim.html">How to file an SLA credit claim</a><br>
                         <a href="/guides/rto-rpo-decision-matrix.html">RTO/RPO decision matrix</a><br>
                         <a href="/guides/ultimate-guide-to-sla-penalties.html">SLA penalties guide</a><br>
                         <a href="/guides/disaster-recovery-basics-rto-vs-rpo.html">RTO vs RPO basics</a><br>
@@ -500,6 +659,24 @@
                     <button class="faq-question" data-i18n="faq.q5">What currencies are supported?</button>
                     <div class="faq-answer">
                         <p data-i18n="faq.a5">Currently, we support USD and EUR currencies. More currencies will be added based on user demand.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">What is an SLA shortfall in simple words?</button>
+                    <div class="faq-answer">
+                        <p>Shortfall is the gap between the uptime the vendor promised and the uptime you actually got. Example: promise 99.95%, actual 99.79%. The shortfall is about 0.16 percentage points. Your contract then maps that gap to a credit percent (for example 10% of the monthly fee). Shortfall is not the same as “total minutes down.” Minutes matter, but the credit table usually keys off the uptime percent or the size of the miss.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do I need monitoring logs to claim an SLA credit?</button>
+                    <div class="faq-answer">
+                        <p>Almost always yes. Vendors ask for proof with start and end times, often in UTC. Export checks from an external monitor, note which URLs failed, and remove minutes the contract excludes (such as announced maintenance). File inside the claim window written in the SLA — many contracts give only 15–30 days after the month ends. This calculator estimates the money. Your logs prove the downtime.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is an SLA service credit the same as insurance?</button>
+                    <div class="faq-answer">
+                        <p>No. An SLA credit is usually money off a future invoice from that vendor. It is capped and often much smaller than your real business loss. Insurance is a separate product that may cover larger interruption losses after its own rules and deductibles. Use this tool for credit estimates. Use a downtime cost estimate for business impact. Ask your insurer about policy cover. Do not assume a 10% invoice credit will make you whole.</p>
                     </div>
                 </div>
             </div>
