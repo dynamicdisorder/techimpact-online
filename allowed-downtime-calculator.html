@@ -179,6 +179,7 @@
                         <div class="form-actions">
                             <button type="button" class="btn primary" id="calc-allowed-btn">Calculate</button>
                             <button type="button" class="btn secondary" id="reset-allowed-btn">Reset</button>
+                            <button type="button" class="btn secondary" id="share-allowed-btn">Copy share link</button>
                         </div>
                     </div>
 
@@ -545,8 +546,18 @@
     <div id="footer-placeholder"></div>
 
     <script src="js/includes.js"></script>
+    <script src="utils/scenarioUrl.js"></script>
     <script>
 (function () {
+    var scenarioMap = {
+        up: 'uptime-preset',
+        upc: 'uptime-custom',
+        pd: 'period-preset',
+        pdc: 'period-custom',
+        idt: 'inverse-downtime',
+        ipd: 'inverse-period'
+    };
+
     function formatNumber(n, digits) {
         if (!isFinite(n)) return '—';
         var d = (digits == null) ? 3 : digits;
@@ -634,25 +645,55 @@
         calculateAllowed();
     }
 
+    function syncScenarioUrl() {
+        if (window.ScenarioUrl) {
+            ScenarioUrl.writeFromForm(scenarioMap, { clearHash: true });
+        }
+    }
+
+    function runAllowed() {
+        calculateAllowed();
+        syncScenarioUrl();
+    }
+
+    function runInverse() {
+        calculateInverse();
+        syncScenarioUrl();
+    }
+
     document.getElementById('uptime-preset').addEventListener('change', function () {
         toggleCustomFields();
-        calculateAllowed();
+        runAllowed();
     });
     document.getElementById('period-preset').addEventListener('change', function () {
         toggleCustomFields();
-        calculateAllowed();
+        runAllowed();
     });
-    document.getElementById('uptime-custom').addEventListener('input', calculateAllowed);
-    document.getElementById('period-custom').addEventListener('input', calculateAllowed);
-    document.getElementById('calc-allowed-btn').addEventListener('click', calculateAllowed);
-    document.getElementById('reset-allowed-btn').addEventListener('click', resetAllowed);
-    document.getElementById('calc-inverse-btn').addEventListener('click', calculateInverse);
-    document.getElementById('inverse-downtime').addEventListener('input', calculateInverse);
-    document.getElementById('inverse-period').addEventListener('input', calculateInverse);
+    document.getElementById('uptime-custom').addEventListener('input', runAllowed);
+    document.getElementById('period-custom').addEventListener('input', runAllowed);
+    document.getElementById('calc-allowed-btn').addEventListener('click', runAllowed);
+    document.getElementById('reset-allowed-btn').addEventListener('click', function () {
+        resetAllowed();
+        syncScenarioUrl();
+    });
+    document.getElementById('calc-inverse-btn').addEventListener('click', runInverse);
+    document.getElementById('inverse-downtime').addEventListener('input', runInverse);
+    document.getElementById('inverse-period').addEventListener('input', runInverse);
+    document.getElementById('share-allowed-btn').addEventListener('click', async function () {
+        var btn = document.getElementById('share-allowed-btn');
+        if (!window.ScenarioUrl) return;
+        var ok = await ScenarioUrl.copyShareUrl(scenarioMap);
+        btn.textContent = ok ? 'Link copied!' : 'Copy failed';
+        setTimeout(function () { btn.textContent = 'Copy share link'; }, 2000);
+    });
 
+    if (window.ScenarioUrl) {
+        ScenarioUrl.applyFromLocation(scenarioMap);
+    }
     toggleCustomFields();
     calculateAllowed();
     calculateInverse();
+    syncScenarioUrl();
 })();
     </script>
 </body>
