@@ -322,6 +322,9 @@
                             <span class="btn-icon">📷</span>
                             <span data-i18n="results.export">Export Summary as PNG</span>
                         </button>
+                        <button class="btn secondary" id="share-scenario-btn" type="button" style="margin-top:0.75rem;">
+                            Copy shareable scenario link
+                        </button>
                     </div>
                 </div>
             </div>
@@ -577,6 +580,8 @@
                 <div class="step">
                     <h3 class="step-title">Learn</h3>
                     <p class="step-description">
+                        <a href="/reliability-money-toolkit.html">Reliability Money Toolkit</a><br>
+                        <a href="/guides/recent-outages-cost-brief.html">Recent outages → money impact</a><br>
                         <a href="/guides.html">All guides</a><br>
                         <a href="/guides/sla-uptime-downtime-reference.html">SLA uptime → downtime tables</a><br>
                         <a href="/guides/calendar-month-sla-downtime-tables.html">Calendar-month SLA tables</a><br>
@@ -697,6 +702,7 @@
     <!-- Utility Modules -->
     <script src="utils/slaMath.js"></script>
     <script src="utils/format.js"></script>
+    <script src="utils/scenarioUrl.js"></script>
     <script src="utils/tests.js"></script>
     
     <!-- Main Application Script -->
